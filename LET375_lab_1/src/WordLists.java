@@ -7,11 +7,11 @@ import java.util.*;
 public class WordLists {
 	
 	// Instance variables
-	HashMap<String, Integer> unsortedDict = new HashMap<String, Integer>(); // every dict is based on this
-	TreeMap<String, Integer> alfaSortedDict = new TreeMap<String, Integer>();
-	List<String> backwardsSortedDict = new LinkedList<String>();
-	Set<Map<String, Integer>> freqSortedDict;
-	
+	private HashMap<String, Integer> unsortedDict = new HashMap<String, Integer>(); // every dict is based on this
+	private TreeMap<String, Integer> alfaSortedDict = new TreeMap<String, Integer>();
+	private List<String> backwardsSortedDict = new LinkedList<String>();
+	private Set<Map<String, Integer>> freqSortedDict;
+	private StringBuilder strBuilder = new StringBuilder();
 	private Reader in = null;
 	Map<String, Integer> workMap = new HashMap<String, Integer>(); // used for computing
 	
@@ -66,9 +66,12 @@ public class WordLists {
 	}
 
 	// Given, though not used by us. May we skip it?
+	// We can make use it by letting this function reverse the string. Although I dont't see why we'd return
+	// an empty string ""
 	private String reverse(String s) {
+		s = strBuilder.reverse().toString();
 		// define!
-		return "";
+		return s; // previously: ""
 	}
 
 	// Computes the number of occurrences of a word using the "base" dictionary unsortedDict.
