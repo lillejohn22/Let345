@@ -32,7 +32,8 @@ public class CollectionOps {
     	
     // Put your code for reverse here ... 
 	public static <T> List<T> reverse(List<T> l)  {
-		// Skriv mer kod här 
+		// Skriv mer kod här
+		return l;
 	}
 
 
