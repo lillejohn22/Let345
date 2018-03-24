@@ -1,6 +1,18 @@
 package collection;
 
 
+// Skriv en generisk (statisk) klassmetod print som skriver ut elementen i en objektsamling:     
+// public static <T> void print(Collection<T> l) Om samlingen innehåller elementen a, b och c så 
+// skall utskriften ha formen [a,b,c] och [] om samlingen är tom. Placera metoden i klassen CollectionOps 
+// och skriv testfall för den i main. Du får anta att samlingens elementtyp har en toString-metod, men 
+// inte att hela samlingen har en sådan. Studera först typen java.util.Collection i Java API. Tips: 
+// Samlingar är itererbara.
+
+
+
+
+
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,9 +23,18 @@ import java.util.function.*;
 
 public class CollectionOps {
 
-    // Put your code for print here ... 
-    
-    // Put your code for reverse here ...
+    // Put your code for print here ...
+	
+	public static <T> void print(Collection<T> l) {
+		for (T temp : l)
+			System.out.print(temp.toString());
+	}
+    	
+    // Put your code for reverse here ... 
+	public static <T> List<T> reverse(List<T> l)  {
+		// Skriv mer kod här 
+	}
+
 
     // Put your code for less here ...
     
