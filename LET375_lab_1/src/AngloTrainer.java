@@ -1,4 +1,4 @@
-// Author(s): Anton Frigård and Johan Nilsson
+// Author(s): Anton Frigard and Johan Nilsson
 // Email: frigard@student.chalmers.se, nilssojo@student.chalmers.se
 // Date:	 2018-03-21
 
