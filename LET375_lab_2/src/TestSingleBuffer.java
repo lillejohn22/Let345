@@ -3,18 +3,21 @@ import java.io.*;
 public class TestSingleBuffer {
 	
 	// Gjorde en klass för att ha ett objekt som kan agera buffer. Venne om det är bra dock.
-	private class SingleBuffer<E>
+	private class SingleBuffer<B>
 	{
-		private E t;
-		public boolean put(E t) {
-			this.t = (this.t == null) ? t : this.t;
-			if(this.t == null) {return true;}
+		private B b = null;
+		
+		public boolean put(B b) {
+			this.b = (this.b == null) ? b : this.b;
+			if(this.b == null) {return true;}
 			return false;
 		}
-		public E get() {
-			if(this.t == null) {return null;}
-			E temp = this.t;
-			this.t = null;
+
+		// kolla om det ska vara this.t eller t i get()
+		public B get() {
+			if(b == null) {return null;} 
+			B temp = b;
+			b = null;
 			return temp;
 		}
 	}
