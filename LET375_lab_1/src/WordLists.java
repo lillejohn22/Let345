@@ -1,6 +1,6 @@
-// Author(s):
-// Version: 
-// Date:	
+// Author(s): Anton Frigård, Johan Nilssom
+// Version: 1
+// Date:	 2018-03-25
 import java.io.*;
 import java.util.*;
 
@@ -11,13 +11,13 @@ public class WordLists {
 	private TreeMap<String, Integer> alfaSortedDict = new TreeMap<String, Integer>();
 	private List<String> backwardsSortedDict = new LinkedList<String>();
 	private Set<Map<String, Integer>> freqSortedDict;
-
+	
 	private Reader in = null;
 	Map<String, Integer> workMap = new HashMap<String, Integer>(); // used for computing
 	
 	// Constructor
-	public WordLists(String inputFileName) throws IOException{
-	    File textFile = new File("provtext.txt");
+	public WordLists(String textFileName) throws IOException {
+	    File textFile = new File(textFileName);
 	    in = new BufferedReader(new FileReader(textFile));
 	}
 	
@@ -56,25 +56,19 @@ public class WordLists {
 	}
 	
 	// Returns a Set with every word in reverse
-	private List<String> reverseAllWords( Collection<String> argSet) {
+	private List<String> reverseAllWords( Collection<String> argCollection ) {
 		List<String> tempList = new LinkedList<String>();
-		for ( String word : argSet ) {
+		for ( String word : argCollection ) {
     			word = new StringBuilder(word).reverse().toString(); // Reverse word
     			tempList.add(word); 
 		}
     			return tempList;
 	}
 
-	// Given, though not used by us. May we skip it?
-	private String reverse(String s) {
-		// define!
-		return "";
-	}
-
 	// Computes the number of occurrences of a word using the "base" dictionary unsortedDict.
 	// After calling, unsortedDict contains words (that are unsorted due to HashMap) mapped
 	// to their respective number of occurrences.
-	private void computeWordFrequencies() throws IOException {
+	private void computeWordFrequencies() throws IOException{
 	    String word;
 	    while ( (word = getWord()) != null ) {
 	    		if ( unsortedDict.containsKey(word)) {
@@ -101,7 +95,7 @@ public class WordLists {
 		}
 	
 	
-	// Compute frequency map. 
+	// Compute frequency dictionary. 
 	private void computeFrequencyMap() {
 		// A sorted set, where elements are Map with only one entry each. Comparator
 		//class FreqComparator is used to sort according to frequency.
@@ -120,7 +114,6 @@ public class WordLists {
 		}
 	}
 			
-	
 	
 	// For printing
 	private void printDictToText(String dictionary) throws FileNotFoundException {
@@ -148,10 +141,8 @@ public class WordLists {
 					for (String key : entryMap.keySet()) {
 						if ( i != entryMap.get(key) ) {
 							i = entryMap.get(key);
-							//System.out.println(i + ": ");
 							printWriter.println(i + ": ");
 						}
-						//System.out.println("		" + key);
 						printWriter.println("	" + key);
 					}
 				}
@@ -161,8 +152,9 @@ public class WordLists {
 	}
 
 	
-	public static void main(String[] args) throws IOException { // Main throws Exception, no good?
-		WordLists wl = new WordLists("provtext.txt");  // arg[0] contains the input file name
+	public static void main(String[] args) {
+		try {
+		WordLists wl = new WordLists(args[0]);
 
 		// Needed to compute each dictionary type. Instantiates a Set called unsortedDict.
 		wl.computeWordFrequencies();
@@ -176,16 +168,15 @@ public class WordLists {
 	    // Determine dictionary sorted according to frequency
 		wl.computeFrequencyMap();
 		
-		try {
 		wl.printDictToText("alfaSortedDict");
 		wl.printDictToText("backwardsSortedDict");
 		wl.printDictToText("freqSortedDict");
-		}
-		catch (FileNotFoundException e) {
-			System.out.println(e);
-		}
 		
 		System.out.println("Finished!");
+		}
+		catch (IOException e) {
+			System.out.println(e);
+		}
 	}
 }
 

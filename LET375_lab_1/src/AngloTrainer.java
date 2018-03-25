@@ -1,6 +1,6 @@
-// Author(s): Anton Frigard and Johan Nilsson
+// Author(s): Anton Frigård and Johan Nilsson
 // Email: frigard@student.chalmers.se, nilssojo@student.chalmers.se
-// Date:	 2018-03-21
+// Date:	 2018-03-25
 
 import java.io.*;
 import java.util.*;
@@ -8,12 +8,12 @@ import java.util.*;
 public class AngloTrainer {
 	
 	// Instance variables
-	private TreeSet<String> dictSet = new TreeSet<String>(), apprWordsSet = new TreeSet<String>();
-
+	private TreeSet<String> dictSet = new TreeSet<String>();
+	private TreeSet<String> apprWordsSet = new TreeSet<String>();
 	private boolean testInput, setContainsWord;
 	
 	// Constructor method
-	public AngloTrainer(String dictFileName) throws IOException, FileNotFoundException {
+	public AngloTrainer(String dictFileName) throws IOException{
 			loadDictionary(dictFileName);
 	}
 
@@ -24,7 +24,7 @@ public class AngloTrainer {
 	}
 	
 	// Load a dictionary from a file
-	private void loadDictionary( String fileName ) throws FileNotFoundException, IOException{
+	private void loadDictionary( String fileName ) throws IOException {
 		File dictfile = new File(fileName);
 		BufferedReader reader = new BufferedReader(new FileReader(dictfile));
 		String word;
@@ -68,7 +68,6 @@ public class AngloTrainer {
 				apprWordsSet.add(temp);
 	}
 	
-	//
 	private boolean includes( String a, String b ) {
 		if ( b == null || b.length() == 0 )
 			return true;
@@ -91,7 +90,7 @@ public class AngloTrainer {
 
     public static void main(String[] args) {
     		try {
-    		AngloTrainer trainer = new AngloTrainer("dictionary.txt");
+    		AngloTrainer trainer = new AngloTrainer(args[0]);
     		
     		int maxLength = trainer.findLongestWord(trainer.dictSet); // Find length of longest word
     		String randomLetters = trainer.randomLetters(maxLength); // Compute random letters
@@ -116,9 +115,9 @@ public class AngloTrainer {
     				trainer.apprWordsSet.remove(suggestedWord);
     			}else {
     				if ( !trainer.testInput && !trainer.setContainsWord)
-    					System.out.println("You used illegal letters or too many and the word was not in the dictionary");
+    					System.out.println("You used illegal letters and/or too many and the word was not in the dictionary");
     				else if (!trainer.testInput)
-    					System.out.println("You used illegal letters or too many");
+    					System.out.println("You used illegal letters and/or too many");
     				else
         				System.out.println("The word is not in the dictionary");
     				trainer.dumpDict(trainer.apprWordsSet);
