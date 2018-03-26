@@ -1,36 +1,16 @@
 import java.io.*;
+import singleBuffer.*;
 
 public class TestSingleBuffer {
 	
-	// Gjorde en klass f�r att ha ett objekt som kan agera buffer. Venne om det �r bra dock.
-	private class SingleBuffer<S>
-	{
-		private S s = null;
-		
-		public boolean put(S s) {
-			if(this.s == null) {
-				this.s = s;
-				return true;
-				}
-			return false;
-		}
-
-		// kolla om det ska vara this.s eller s i get()
-		public S get() {
-			if(s == null) {return null;} 
-			S temp = s;
-			s = null;
-			return temp;
-		}
-	}
-	
+	// Gjorde en klass f�r att ha ett objekt som kan agera buffer. Venne om det �r bra dock.	
     public static void main(String[] args) throws IOException  {
         BufferedReader in  = new BufferedReader(new InputStreamReader(System.in));
         
-        // Egen kod inlagd h�r
-        TestSingleBuffer testBuff = new TestSingleBuffer();
-        SingleBuffer<String> stringBuf = testBuff.new SingleBuffer<String>();
-        // Slut p� egen kid
+        // Egen kod inlagd har
+        SingleBuffer<String> stringBuf = new SingleBuffer<String>();
+        // Slut pa egen kid
+      
         
         while ( true ) {
             System.out.print("Command (p/g/q): "); 

@@ -16,8 +16,7 @@ import java.util.Iterator;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.*;
-
-import TestSingleBuffer.SingleBuffer;
+import singleBuffer.*;
 
 public class CollectionOps {
 	
@@ -28,8 +27,14 @@ public class CollectionOps {
 		System.out.print("]");
 	}
     	
-	public static <T> List<T> reverse(List<T> l)  {
-		
+	public static <T> List<T> reverse(List<T> l)  { 
+		SingleBuffer<T> buffert = new SingleBuffer<T>();
+		int index;
+		for(index = 0; index < l.size(); index++)  {
+			buffert.put( l.get(index) );
+			l.add( index, l.get(l.size()-index) );
+			l.add( l.size()-index, buffert.get() );
+		}
 		return l;
 	}
 
