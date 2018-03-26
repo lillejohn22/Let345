@@ -2,7 +2,7 @@ import java.io.*;
 
 public class TestSingleBuffer {
 	
-	// Gjorde en klass för att ha ett objekt som kan agera buffer. Venne om det är bra dock.
+	// Gjorde en klass fï¿½r att ha ett objekt som kan agera buffer. Venne om det ï¿½r bra dock.
 	private class SingleBuffer<S>
 	{
 		private S s = null;
@@ -26,14 +26,11 @@ public class TestSingleBuffer {
 	
     public static void main(String[] args) throws IOException  {
         BufferedReader in  = new BufferedReader(new InputStreamReader(System.in));
-		
-
-        //  Define the object stringBuf of type SingleBuffer here...
         
-        // Egen kod inlagd här
+        // Egen kod inlagd hï¿½r
         TestSingleBuffer testBuff = new TestSingleBuffer();
         SingleBuffer<String> stringBuf = testBuff.new SingleBuffer<String>();
-        // Slut på egen kid
+        // Slut pï¿½ egen kid
         
         while ( true ) {
             System.out.print("Command (p/g/q): "); 

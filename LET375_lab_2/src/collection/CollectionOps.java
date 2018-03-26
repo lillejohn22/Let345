@@ -2,15 +2,11 @@ package collection;
 
 
 // Skriv en generisk (statisk) klassmetod print som skriver ut elementen i en objektsamling:     
-// public static <T> void print(Collection<T> l) Om samlingen innehåller elementen a, b och c så 
-// skall utskriften ha formen [a,b,c] och [] om samlingen är tom. Placera metoden i klassen CollectionOps 
-// och skriv testfall för den i main. Du får anta att samlingens elementtyp har en toString-metod, men 
-// inte att hela samlingen har en sådan. Studera först typen java.util.Collection i Java API. Tips: 
-// Samlingar är itererbara.
-
-
-
-
+// public static <T> void print(Collection<T> l) Om samlingen innehï¿½ller elementen a, b och c sï¿½ 
+// skall utskriften ha formen [a,b,c] och [] om samlingen ï¿½r tom. Placera metoden i klassen CollectionOps 
+// och skriv testfall fï¿½r den i main. Du fï¿½r anta att samlingens elementtyp har en toString-metod, men 
+// inte att hela samlingen har en sï¿½dan. Studera fï¿½rst typen java.util.Collection i Java API. Tips: 
+// Samlingar ï¿½r itererbara.
 
 
 import java.util.List;
@@ -21,18 +17,19 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.*;
 
-public class CollectionOps {
+import TestSingleBuffer.SingleBuffer;
 
-    // Put your code for print here ...
+public class CollectionOps {
 	
 	public static <T> void print(Collection<T> l) {
+		System.out.print("[");
 		for (T temp : l)
-			System.out.print(temp.toString());
+			System.out.print(temp.toString() + ",");
+		System.out.print("]");
 	}
     	
-    // Put your code for reverse here ... 
 	public static <T> List<T> reverse(List<T> l)  {
-		// Skriv mer kod här
+		
 		return l;
 	}
 

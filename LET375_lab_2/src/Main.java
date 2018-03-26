@@ -39,12 +39,12 @@ public class Main {
              
          // Assignment 5: Write code to test filter here
 
-         ArrayList<Person> pl = new ArrayList<>();
-         pl.add(new Person("Nisse","nisse@hipnet.moc","male",23));
-         pl.add(new Person("Lisa","lisa@shipnet.sea","female",67));
-         pl.add(new Person("Ada","ada@jahuu.vanu","female",49));
-         pl.add(new Person("Kal","karl@gotnet.vg","male",78));
-         pl.add(new Person("Beda","beda@fishnet.cod","female",102));
+//         ArrayList<Person> pl = new ArrayList<>();
+//         pl.add(new Person("Nisse","nisse@hipnet.moc","male",23));
+//         pl.add(new Person("Lisa","lisa@shipnet.sea","female",67));
+//         pl.add(new Person("Ada","ada@jahuu.vanu","female",49));
+//         pl.add(new Person("Kal","karl@gotnet.vg","male",78));
+//         pl.add(new Person("Beda","beda@fishnet.cod","female",102));
         
          // Assignment 6: Write code using lambdas here
     }
