@@ -1,11 +1,9 @@
 package collection;
 import java.util.*;
 
-public class IntegerComparator implements Comparator<Collection<Integer>> {
+public class IntegerComparator implements Comparator<Integer> {
     @Override    
-	public int compare( Collection<Integer> c1, Collection<Integer> c2 ) {
-    		Integer a = Collections.max(c1) < Collections.min(c2) ? 1 : -1;
-    		return a; 
+	public int compare( Integer i1, Integer i2 ) {
+    		return Integer.compare(i1, i2); 
         }
 }
-
