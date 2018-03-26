@@ -39,7 +39,7 @@ public class CollectionOps {
 	}
 
 	public static <T extends Comparable<T>> boolean less( Collection<T> c1, Collection<T> c2, Comparator<T> comp ) {
-		return ( -1 == comp.compare(Collections.max(c1), Collections.min(c2)) );
+		return ( -1 == comp.compare(Collections.max(c1,comp), Collections.min(c2,comp)));
 	}
     
     // Example

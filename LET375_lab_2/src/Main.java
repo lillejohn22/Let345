@@ -42,7 +42,21 @@ public class Main {
          list1.add(2);
          list1.add(3);
          List<Integer> list2 = new LinkedList<Integer>();
-         list2.add(1);
+         list2.add(6);
+         
+         List<String> campusLindholmen = new LinkedList(); 
+         campusLindholmen.add("he");
+         campusLindholmen.add("123");
+         campusLindholmen.add("234");
+         campusLindholmen.add("345");
+         campusLindholmen.add("456");
+         List<String> a = new LinkedList();
+         a.add("22as");
+         a.add("2jfgh2as");
+         a.add("2sss");
+         a.add("22aasdas");
+         
+         
          
          System.out.println(less(list1,list2,intcomp));
          
