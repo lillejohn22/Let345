@@ -30,18 +30,18 @@ public class CollectionOps {
 	public static <T> List<T> reverse(List<T> l)  { 
 		SingleBuffer<T> buffert = new SingleBuffer<T>();
 		int index;
-		for(index = 0; index < l.size(); index++)  {
+		for(index = 0; index < l.size()/2; index++)  {
 			buffert.put( l.get(index) );
-			l.add( index, l.get(l.size()-1-index) );
-			buffert.put( l.get(index) );				
-			l.add( index, l.get(l.size()-index) );		
-			l.add( l.size()-index, buffert.get() );
+			l.set( index, l.get(l.size()-1-index) );
+			l.set(l.size()-1-index, buffert.get());	
 		}
 		return l;
 	}
 
-
-    // Put your code for less here ...
+	public static <T> boolean less(Collection<T> c1, Collection<T> c2, Comparator<T> comp) {
+		boolean svar = ( comp.compare(c1,c2) > 0 ) ? true : false;
+		return svar; 
+	}
     
     // Example
     public static <T,R> Collection<R>
