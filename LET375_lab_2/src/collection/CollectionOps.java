@@ -23,7 +23,7 @@ public class CollectionOps {
 	public static <T> void print(Collection<T> l) {
 		System.out.print("[");
 		for (T temp : l)
-			System.out.print(temp.toString() + ",");
+			System.out.print(temp + ",");
 		System.out.print("]");
 	}
     	
@@ -38,8 +38,9 @@ public class CollectionOps {
 		return l;
 	}
 
-	public static <T extends Comparable<T>> boolean less( Collection<T> c1, Collection<T> c2, Comparator<T> comp ) {
-		return ( -1 == comp.compare(Collections.max(c1,comp), Collections.min(c2,comp)));
+	public static <T extends Comparable<T>> boolean
+	less( Collection<T> c1, Collection<T> c2, Comparator<T> comp ) {
+		return comp.compare(Collections.max(c1,comp), Collections.min(c2,comp)) == -1;
 	}
     
     // Example

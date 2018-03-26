@@ -56,13 +56,7 @@ public class Main {
          a.add("2sss");
          a.add("22aasdas");
          
-         
-         
          System.out.println(less(list1,list2,intcomp));
-         
-         
-         
-         
          
          
          // Assignment 5: Write code to test map here
