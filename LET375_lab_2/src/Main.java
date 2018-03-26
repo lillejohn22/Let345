@@ -15,25 +15,24 @@ public class Main {
          ArrayList<String> names = new ArrayList<String>();
 
          // Test print for an empty list
-         print(names); System.out.println();
+//         print(names); System.out.println();
 
          // Test print for a list containing one element
          names.add("a");
-         print(names); System.out.println();
+//         print(names); System.out.println();
 
          // Test print for a list containing more than one elment
          names.add("b");
          names.add("c");
-         print(names); System.out.println();
+//         print(names); System.out.println();
          
          // Test the return value from reverse
-         print(reverse(names));
-         System.out.println();
+//         print(reverse(names));
+//         System.out.println();
          // Test that reverse mutates its argument
-         print(names);
-         System.out.println();
+//         print(names);
+//         System.out.println();
 
-         
          
          // Assignment 4: Write code to test less here 
          IntegerComparator intcomp = new IntegerComparator();
@@ -56,13 +55,24 @@ public class Main {
          a.add("2sss");
          a.add("22aasdas");
          
-         System.out.println(less(list1,list2,intcomp));
+//         System.out.println(less(list1,list2,intcomp));
          
          
          // Assignment 5: Write code to test map here
              
          // Assignment 5: Write code to test filter here
-
+         List<Integer> filterList = new ArrayList<Integer>();
+         filterList.add(5); // is odd --> false 
+         filterList.add(2); // is even --> true
+         filterList.add(7);
+         filterList.add(8);
+         filterList.add(10);
+         
+         Collection<Boolean> filterList2 = filter(new IsEven(), filterList);
+         for (Boolean b : filterList2)
+        	 	System.out.println(b);
+         
+         
 //         ArrayList<Person> pl = new ArrayList<>();
 //         pl.add(new Person("Nisse","nisse@hipnet.moc","male",23));
 //         pl.add(new Person("Lisa","lisa@shipnet.sea","female",67));

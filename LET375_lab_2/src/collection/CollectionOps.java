@@ -64,6 +64,25 @@ public class CollectionOps {
         }
     }
     
-    // Put your code for filter here ...
+	public static <T,R> Collection<R> filter( Predicate<T,R> p, Collection<T> c ) {
+		Class<? extends Collection> cls = c.getClass();
+		 
+		try {
+            Collection<R> result = (Collection<R>) cls.newInstance();
+            
+            for ( T x : c )
+                result.add(p.test(x));
+            return result;   
+	        }   
+		catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+		}
 
 }
+
+
+
+
+
