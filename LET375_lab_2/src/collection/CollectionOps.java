@@ -31,8 +31,13 @@ public class CollectionOps {
 		SingleBuffer<T> buffert = new SingleBuffer<T>();
 		int index;
 		for(index = 0; index < l.size(); index++)  {
+<<<<<<< HEAD
 			buffert.put( l.get(index) );
 			l.add( index, l.get(l.size()-1-index) );
+=======
+			buffert.put( l.get(index) );				
+			l.add( index, l.get(l.size() makslda asklnd lajsndjk9 l-index) );		
+>>>>>>> branch 'Temp_labb' of https://github.com/lillejohn22/Let375-labbarna.git
 			l.add( l.size()-index, buffert.get() );
 		}
 		return l;

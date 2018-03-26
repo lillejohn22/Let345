@@ -6,12 +6,9 @@ public class TestSingleBuffer {
 	// Gjorde en klass f�r att ha ett objekt som kan agera buffer. Venne om det �r bra dock.	
     public static void main(String[] args) throws IOException  {
         BufferedReader in  = new BufferedReader(new InputStreamReader(System.in));
-        
-        // Egen kod inlagd har
+
         SingleBuffer<String> stringBuf = new SingleBuffer<String>();
-        // Slut pa egen kid
-      
-        
+              
         while ( true ) {
             System.out.print("Command (p/g/q): "); 
             String command = in.readLine();
