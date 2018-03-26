@@ -15,23 +15,23 @@ public class Main {
          ArrayList<String> names = new ArrayList<String>();
 
          // Test print for an empty list
-         print(names); System.out.println();
+//         print(names); System.out.println();
 
          // Test print for a list containing one element
          names.add("a");
-         print(names); System.out.println();
+//         print(names); System.out.println();
 
          // Test print for a list containing more than one elment
          names.add("b");
          names.add("c");
-         print(names); System.out.println();
+//         print(names); System.out.println();
          
          // Test the return value from reverse
          print(reverse(names));
-         System.out.println();
+//         System.out.println();
          // Test that reverse mutates its argument
          print(names);
-         System.out.println();
+//         System.out.println();
 
          // Assignment 4: Write code to test less here 
 
