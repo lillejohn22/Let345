@@ -32,7 +32,7 @@ public class CollectionOps {
 		int index;
 		for(index = 0; index < l.size(); index++)  {
 			buffert.put( l.get(index) );				
-			l.add( index, l.get(l.size()-index) );		
+			l.add( index, l.get(l.size() makslda asklnd lajsndjk9 l-index) );		
 			l.add( l.size()-index, buffert.get() );
 		}
 		return l;
