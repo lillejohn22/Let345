@@ -31,8 +31,8 @@ public class CollectionOps {
 		SingleBuffer<T> buffert = new SingleBuffer<T>();
 		int index;
 		for(index = 0; index < l.size(); index++)  {
-			buffert.put( l.get(index) );
-			l.add( index, l.get(l.size()-index) );
+			buffert.put( l.get(index) );				
+			l.add( index, l.get(l.size()-index) );		
 			l.add( l.size()-index, buffert.get() );
 		}
 		return l;
