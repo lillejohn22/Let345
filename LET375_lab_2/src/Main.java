@@ -14,84 +14,98 @@ public class Main {
     public static void main(String[] args) {    
          ArrayList<String> names = new ArrayList<String>();
 
+         // ASSIGMENT 2
          // Test print for an empty list
-//         print(names); System.out.println();
+         print(names);
 
          // Test print for a list containing one element
          names.add("a");
-//         print(names); System.out.println();
+         print(names);
 
          // Test print for a list containing more than one elment
          names.add("b");
          names.add("c");
-//         print(names); System.out.println();
+         names.add("d");
+         print(names);
          
+         // ASSIGNMENT 3
          // Test the return value from reverse
-//         print(reverse(names));
-//         System.out.println();
+         print(reverse(names));
+
          // Test that reverse mutates its argument
-//         print(names);
-//         System.out.println();
+         print(names);
 
          
-         // Assignment 4: Write code to test less here 
+         // ASSIGNMENT 4: Write code to test less here 
          IntegerComparator intcomp = new IntegerComparator();
-         List<Integer> list1 = new LinkedList<Integer>();
-         list1.add(1);
-         list1.add(2);
-         list1.add(3);
-         List<Integer> list2 = new LinkedList<Integer>();
-         list2.add(6);
+         StringComparator stringcomp = new StringComparator();
+
+         // Initiate arrays
+         Integer[] temp1 = {4,2,5,1,3};
+         Integer[] temp2 = {8,6,7,9};
+         Integer[] temp3 = {97,5,123,18};
+         String[] temp4 = {"HC2", "ED", "HC3"};
+         String[] temp5 = {"Saga", "Svea", "Jupiter"};
+
+         // Convert to Lists. Quicker than adding separate elements.
+         List<Integer> list1 = Arrays.asList(temp1);
+         List<Integer> list2 = Arrays.asList(temp2);
+         List<Integer> list3 = Arrays.asList(temp3);
+         List<String> johanneberg = Arrays.asList(temp4);
+         List<String> campusLindholmen = Arrays.asList(temp5);
          
-         List<String> campusLindholmen = new LinkedList(); 
-         campusLindholmen.add("he");
-         campusLindholmen.add("123");
-         campusLindholmen.add("234");
-         campusLindholmen.add("345");
-         campusLindholmen.add("456");
-         List<String> a = new LinkedList();
-         a.add("22as");
-         a.add("2jfgh2as");
-         a.add("2sss");
-         a.add("22aasdas");
+         List<Boolean> resultsIntComp = new ArrayList<Boolean>();
+         resultsIntComp.add(less(list1,list2,intcomp)); // should return true
+         resultsIntComp.add(less(list1,list3,intcomp)); // should return false
+         resultsIntComp.add(less(list2,list3,intcomp)); // should return false
+         resultsIntComp.add(less(johanneberg,campusLindholmen,stringcomp)); // should return true
          
-//         System.out.println(less(list1,list2,intcomp));
-         
-         
-         // Assignment 5: Write code to test map here
-             
-         // Assignment 5: Write code to test filter here
-         List<Integer> filterList = new ArrayList<Integer>();
-         filterList.add(5); // is odd --> false 
-         filterList.add(2); // is even --> true
-         filterList.add(7);
-         filterList.add(8);
-         filterList.add(10);
-         
-         Collection<Integer> filterList2 = filter(new IsEven(), filterList);
-         for (Integer b : filterList2)
-        	 	System.out.println(b);
+         print(resultsIntComp);
          
          
-//         ArrayList<Person> pl = new ArrayList<>();
-//         pl.add(new Person("Nisse","nisse@hipnet.moc","male",23));
-//         pl.add(new Person("Lisa","lisa@shipnet.sea","female",67));
-//         pl.add(new Person("Ada","ada@jahuu.vanu","female",49));
-//         pl.add(new Person("Kal","karl@gotnet.vg","male",78));
-//         pl.add(new Person("Beda","beda@fishnet.cod","female",102));
-        
-         // Assignment 6: Write code using lambdas here
-         // Write code that prints out the mail addresses of every woman older than 65
-         // Use print(), map() and filter() and lambda expressions
+         // ASSIGNMENT 5: Write code to test map here
+         List<Double> mTestList = new ArrayList<Double>();
+         mTestList.add(1.1); // is greater than 0 --> return 1
+         mTestList.add(56.7); // is greater than 0 --> return 1
+         mTestList.add(-0.1); // is less than 0 --> return -1
+         mTestList.add(0.0); // is equal to 0 --> return 0
+         mTestList.add(0.001); // is greater than 0 --> return 1
          
-//         Function<Integer, Integer> f = x -> x+1;
-//         java.util.function.Predicate<Integer> p = x -> x.equals(5);
-//         print(filter(p,filterList));
+         Collection<Integer> resultsMapTestList = map(new Sign(), mTestList);
+         print(resultsMapTestList);
+         
+         // ASSIGNMENT 5: Write code to test filter here
+         List<Integer> fTestList = new ArrayList<Integer>();
+         fTestList.add(9001); // is odd --> won't be returned
+         fTestList.add(2); // is even --> will be returned
+         fTestList.add(7); // is odd --> won't be returned
+         fTestList.add(8); // is even --> will be returned
+         fTestList.add(104); // is even --> will be returned
+         
+         Collection<Integer> resultsFilterTestList = filter(new IsEven(), fTestList);
+         print(resultsFilterTestList);
          
          
+         // ASSIGNMENT 6: Write code using lambdas here.
+         ArrayList<Person> pl = new ArrayList<>();
+         pl.add(new Person("Nisse","nisse@hipnet.moc","male",23));
+         pl.add(new Person("Lisa","lisa@shipnet.sea","female",67)); // Email should be returned
+         pl.add(new Person("Ada","ada@jahuu.vanu","female",49));
+         pl.add(new Person("Kal","karl@gotnet.vg","male",78));
+         pl.add(new Person("Beda","beda@fishnet.cod","female",102)); // Kind old lady Beda, ofc email should be returned!
          
+         // 1) Create function object by lambda expression
+         Predicate<Person> p = person -> ( person.getGender() == "female" && person.getAge() > 65);
          
+         // 2) Filter out every woman older than 65
+         Collection<Person> c = filter(p, pl);
          
+         // 3) Retrieve email addresses from filtered list 
+         Function<Person, String> f = person -> person.getEmail();
+         Collection<String> emails = map(f,c);
+         
+         // 4) Print out email addresses
+         print(emails);
     }
 }
 
