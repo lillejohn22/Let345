@@ -1,14 +1,5 @@
 package collection;
 
-
-// Skriv en generisk (statisk) klassmetod print som skriver ut elementen i en objektsamling:     
-// public static <T> void print(Collection<T> l) Om samlingen inneh�ller elementen a, b och c s� 
-// skall utskriften ha formen [a,b,c] och [] om samlingen �r tom. Placera metoden i klassen CollectionOps 
-// och skriv testfall f�r den i main. Du f�r anta att samlingens elementtyp har en toString-metod, men 
-// inte att hela samlingen har en s�dan. Studera f�rst typen java.util.Collection i Java API. Tips: 
-// Samlingar �r itererbara.
-
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,7 +36,7 @@ public class CollectionOps {
     
     // Example
     public static <T,R> Collection<R>
-    map(Function<T,R> f,Collection<T> c) 
+    map(Function<T,R> f, Collection<T> c) 
     {
         // Determine the dynamic type of the collection
         Class<? extends Collection> cls = c.getClass();
@@ -64,21 +55,36 @@ public class CollectionOps {
         }
     }
     
-	public static <T,R> Collection<R> filter( Predicate<T,R> p, Collection<T> c ) {
+	public static <T> Collection<T> filter( Predicate<T> p, Collection<T> c ) {
 		Class<? extends Collection> cls = c.getClass();
-		 
 		try {
-            Collection<R> result = (Collection<R>) cls.newInstance();
-            
-            for ( T x : c )
-                result.add(p.test(x));
-            return result;   
+            Collection<T> result = (Collection<T>) cls.newInstance();
+
+            for ( T x : c ) {
+            		if ( p.test(x) ) result.add(x);
+            }
+            return result;
 	        }   
 		catch (Exception e) {
 	            e.printStackTrace();
 	            return null;
 	        }
 		}
+	
+//	public static <T,R> Collection<R> filter( Predicate<T,R> p, Collection<T> c ) {
+//		Class<? extends Collection> cls = c.getClass();
+//		try {
+//            Collection<R> result = (Collection<R>) cls.newInstance();
+//            
+//            for ( T x : c )
+//                result.add(p.test(x));
+//            return result;   
+//	        }   
+//		catch (Exception e) {
+//	            e.printStackTrace();
+//	            return null;
+//	        }
+//		}
 
 }
 

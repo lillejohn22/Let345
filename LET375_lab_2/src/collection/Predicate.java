@@ -1,5 +1,5 @@
 package collection;
 
-public interface Predicate<T,R> {
-	R test(T x);
+public interface Predicate<T> {
+	boolean test(T x);
 }

@@ -68,8 +68,8 @@ public class Main {
          filterList.add(8);
          filterList.add(10);
          
-         Collection<Boolean> filterList2 = filter(new IsEven(), filterList);
-         for (Boolean b : filterList2)
+         Collection<Integer> filterList2 = filter(new IsEven(), filterList);
+         for (Integer b : filterList2)
         	 	System.out.println(b);
          
          
@@ -81,5 +81,22 @@ public class Main {
 //         pl.add(new Person("Beda","beda@fishnet.cod","female",102));
         
          // Assignment 6: Write code using lambdas here
+         // Write code that prints out the mail addresses of every woman older than 65
+         // Use print(), map() and filter() and lambda expressions
+         
+//         Function<Integer, Integer> f = x -> x+1;
+//         java.util.function.Predicate<Integer> p = x -> x.equals(5);
+//         print(filter(p,filterList));
+         
+         
+         
+         
+         
     }
 }
+
+
+
+
+
+
