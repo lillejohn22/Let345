@@ -7,7 +7,11 @@
 import java.lang.*;
 
 public class Lists {
-   
+
+	// Instance variables
+	private static ListNode nodeIterator = new ListNode();
+	
+	
     // Create an empty list (a null terminated list head).
     public static ListNode mkEmpty() {
         return toList("");
@@ -106,8 +110,7 @@ public class Lists {
     	
     	// Initiate temporary objects
     	StringBuilder text = new StringBuilder();
-    	ListNode nodeIterator = new ListNode(); // We may not change value of l, so manipulate this instead.
-
+    	
     	// Place nodeIterator at first element in list (header)
     	nodeIterator.next = l.next;
     	
@@ -119,23 +122,50 @@ public class Lists {
     		nodeIterator = nodeIterator.next; // step to next ListNode
     		text.append(Character.toString(nodeIterator.element)); // append that node's character to string
     	}
-    	return text.toString();
-    	
+    	return text.toString();    	
     }
     
     // Testmetod: JunitListTest.testContains()
-    public static boolean contains(ListNode head,char c) {
-        return false;
+    // Two alternatives, which to use?
+    public static boolean contains(ListNode head, char c) {
+    	String text = toString(head);
+    	Character chars = c;
+    	return text.contains(chars.toString());
+    	
+//    	nodeIterator.next = head.next;
+//    	
+//    	while (nodeIterator.next != null) {
+//    		nodeIterator = nodeIterator.next;
+//    		if (nodeIterator.element == c)
+//    			return true;
+//    	}
+//    	return false;
     }
     
     // Testmetod: JunitListTest.testCopyUpperCase()
     public static ListNode copyUpperCase(ListNode head) {
-        return null;
+        
+    	StringBuilder upperCase = new StringBuilder();
+    	nodeIterator.next = head.next;
+    	
+    	while (nodeIterator.next != null) {
+    		nodeIterator = nodeIterator.next;
+    		if ( Character.isUpperCase(nodeIterator.element) )
+    			upperCase.append(nodeIterator.element);
+    	}
+    	
+        return toList(upperCase.toString());
     }
     
     // Testmetod: JunitListTest.testAddFirst()
-    public static ListNode addFirst(ListNode l,char c) {  
-        return null;
+    public static ListNode addFirst(ListNode l, char c) {
+    	if ( l == null ) throw new ListsException("Lists: null passed to addFirst");
+    	
+    	ListNode node = new ListNode();
+    	node.next = l.next;
+    	l.next = node;
+    	node.element = c;
+        return l;
     }
          
     // This is a private utility method.
