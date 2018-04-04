@@ -9,7 +9,7 @@ import java.lang.*;
 public class Lists {
 
 	// Instance variables
-	private static ListNode nodeIterator = new ListNode();
+	// private static ListNode nodeIterator = new ListNode();
 	
 	
     // Create an empty list (a null terminated list head).
@@ -110,17 +110,18 @@ public class Lists {
     	
     	// Initiate temporary objects
     	StringBuilder text = new StringBuilder();
+    	ListNode nodePointer = new ListNode();
     	
     	// Place nodeIterator at first element in list (header)
-    	nodeIterator.next = l.next;
+    	nodePointer.next = l.next;
     	
     	// If list only contains a header, then element is guaranteed empty character '\0'
-    	if (nodeIterator.next == null) return "";
+    	if (nodePointer.next == null) return "";
     	
     	// If list contains two or more ListNodes, go through this while-loop. Start at header
-    	while (nodeIterator.next != null) {
-    		nodeIterator = nodeIterator.next; // step to next ListNode
-    		text.append(Character.toString(nodeIterator.element)); // append that node's character to string
+    	while (nodePointer.next != null) {
+    		nodePointer = nodePointer.next; // step to next ListNode
+    		text.append(Character.toString(nodePointer.element)); // append that node's character to string
     	}
     	return text.toString();    	
     }
@@ -132,6 +133,8 @@ public class Lists {
     	Character chars = c;
     	return text.contains(chars.toString());
     	
+//    	ListNode nodeIterator = new ListNode();
+//    	
 //    	nodeIterator.next = head.next;
 //    	
 //    	while (nodeIterator.next != null) {
@@ -170,26 +173,49 @@ public class Lists {
          
     // This is a private utility method.
     private static ListNode getLastNode(ListNode head) {
-        return null;
+        ListNode nodeIterator = head;
+        while(nodeIterator.next != null)
+        	nodeIterator = nodeIterator.next;
+        return nodeIterator;
     }
    
-    // Testmetod: JunitListTest.testAddLast()
+    // Testmetod: JunitListTest.testAddLast() 
     public static ListNode addLast(ListNode l,char c) {  
-        return null;
+        ListNode newLastNode = new ListNode(); 
+        ListNode LastNode = getLastNode(l); // points to the last element in l.I can't use nodeIterator here right?
+        LastNode.next = newLastNode;
+        newLastNode.element = c;
+        return l;
     }
     
     // Testmetod: JunitListTest.testConcat()
-    public static ListNode concat(ListNode l1,ListNode l2) {  
-        return null;
+    public static ListNode concat(ListNode l1,ListNode l2) { 
+   	while(l2.next != null) {
+    		addLast(l1, l2.element);
+    		removeAll(l2, l2.element);
+    }
+   		return l1;
     }
     
     // Testmetod: JunitListTest.testAddAll()
-    public static ListNode addAll(ListNode l1,ListNode l2) { 
-        return null;
+    public static ListNode addAll(ListNode l1,ListNode l2) {
+    	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to addFirst");
+    	
+       	while(l2.next != null)
+    		addLast(l1, l2.element);
+   		return l1;
     }
       
     // Testmetod: JunitListTest.testReverse()
     public static ListNode reverse(ListNode head) {  
-        return null;
+        ListNode reversedL = new ListNode();
+        
+        while(nodeIterator.next != null) {
+        	nodeIterator = head;
+        	reversedL = nodeIterator.next;
+        	reversedL.element = nodeIterator.element;
+        	reversedL.next = nodeIterator;
+        }
+        return reversedL;
     }
 }
