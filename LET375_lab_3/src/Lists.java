@@ -158,26 +158,26 @@ public class Lists {
     			upperCase.append(nodePtr.element);				// add it to Str upperCase
     	}
     	
-        return toList(upperCase.toString());					
+        return toList(upperCase.toString());
     }
     
     // Testmetod: JunitListTest.testAddFirst()
     public static ListNode addFirst(ListNode l, char c) {
-    	if ( l == null ) throw new ListsException("Lists: null passed to addFirst");
+    	if ( l == null ) throw new ListsException("Lists: null passed to addFirst"); // catches null pointers in argument
     	
-    	ListNode node = new ListNode();
-    	node.next = l.next;
-    	l.next = node;
-    	node.element = c;
+    	ListNode nodePtr = new ListNode();
+    	nodePtr.next = l.next;		// Make nodePtr point to first node in l, (l is head of list) 
+    	l.next = nodePtr;			// Now next node is nodePtr
+    	nodePtr.element = c;		// Add element to nodePtr
         return l;
     }
          
     // This is a private utility method.
     private static ListNode getLastNode(ListNode head) {
-        ListNode nodeIterator = head;
-        while(nodeIterator.next != null)
-        	nodeIterator = nodeIterator.next;
-        return nodeIterator;
+        ListNode nodePtr = head;			// make nodePtr point to head of list 
+        while(nodePtr.next != null)		 
+        	nodePtr = nodePtr.next;			// mode nodePtr to next node   
+        return nodePtr;						// return ptr to last valid node
     }
    
     // Testmetod: JunitListTest.testAddLast() 
