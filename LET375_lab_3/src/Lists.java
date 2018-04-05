@@ -282,27 +282,40 @@ public class Lists {
         return l;
     }
     
+    
     // Testmetod: JunitListTest.testConcat()
     public static ListNode concat(ListNode l1,ListNode l2) { // COMPLETE
     	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to concat");
     	
-    	ListNode nodePtr = new ListNode();
-    	nodePtr = l2; 
+    	ListNode l2Pointer = new ListNode();
+    	ListNode l1Pointer = new ListNode();
     	
-	   	while(nodePtr.next != null) {
-	    		addLast(l1, nodePtr.next.element);			// l2 is head of list and doesn't have any element. So add element of l2.next to l1
-	    		removeAll(l2, nodePtr.next.element);		// Remove the copied element and node? 
-	    		nodePtr = nodePtr.next; 					// Make nodePtr point to next object (so we can iterate through the list) 
+    	l2Pointer = l2; 
+    	l1Pointer = getLastNode(l1);
+    	
+	   	while(l2Pointer.next != null) {
+  	    		l2Pointer = l2Pointer.next; 		// Make nodePtr point to next object (so we can iterate through the list)
+  	    		l1Pointer.next = l2Pointer;
+  	    		l1Pointer = l1Pointer.next;
 	    }
-	   		return l1;
+	   	
+   		l2.next = null;
+   		return l1;
 	    }
+    
+    
     
     // Testmetod: JunitListTest.testAddAll()
     public static ListNode addAll(ListNode l1,ListNode l2) {
     	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to addAll");
     	
-       	while(l2.next != null)
-    		addLast(l1, l2.element);
+    	ListNode nodePtr = new ListNode();
+    	nodePtr = l2;
+    	
+       	while(nodePtr.next != null) {
+       		nodePtr = nodePtr.next;
+       		addLast(l1, nodePtr.element);
+       	}
    		return l1;
     }
      
