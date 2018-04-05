@@ -4,7 +4,6 @@
  * @author(s)
  * @version 2016-04-19
  */
-import java.lang.*;
 
 public class Lists {
 	
@@ -120,12 +119,8 @@ public class Lists {
     }
     
     // Testmetod: JunitListTest.testContains()
-    // Two alternatives, which to use?
-    public static boolean contains(ListNode head, char c) {
+    public static boolean contains(ListNode head, char c) { // COMPLETE
     	if ( head == null ) throw new ListsException("Lists: null passed to contains");
-//    	String text = toString(head); // Use method implemented above
-//    	Character chars = c;
-//    	return text.contains(chars.toString());
     	
     	ListNode pointer = new ListNode();
     	pointer.next = head.next; // Let pointer.next reference first ListNode after header
@@ -156,29 +151,31 @@ public class Lists {
      * without manipulating argument list
      */
     public static ListNode copyList (ListNode head) { // COMPLETE
-    	
+    
     	ListNode startNode = new ListNode(); // A new header
     	ListNode pointer = new ListNode();
     	pointer = head;
     	
-    	if (pointer.next != null) {
-    		/* If there are at least one ListNode (not including header),
-    		 * make a copy of that ListNode and append it to the header (startNode).
-    		 * This needs only be done once.
-    		 */
-    		pointer = pointer.next;
-    		ListNode newNode = copyNode(pointer);
-    		startNode.next = newNode;
-    		
-    		/* If there are subsequent ListNodes, append copies of these to the new list.
-    		 * Note that pointer is pointing at the original list with header "head".
-    		 */
-    		while (pointer.next != null) {
-    			pointer = pointer.next;
-    			newNode.next = copyNode(pointer); // Let newNode point to a new ListNode
-    			newNode = newNode.next;
-    		}
-    	}
+    	// If list "head" only contains header, return a new header
+    	if (pointer.next == null) return startNode;
+	
+		/* If there is at least one ListNode (not including header),
+		 * make a copy of that ListNode and append it to the header (startNode).
+		 * This needs only be done once.
+		 */
+		pointer = pointer.next;
+		ListNode newNode = copyNode(pointer);
+		startNode.next = newNode;
+		
+		/* If there are subsequent ListNodes, append copies of these to the new list.
+		 * Note that pointer is pointing at the original list with header "head".
+		 */
+		while (pointer.next != null) {
+			pointer = pointer.next;
+			newNode.next = copyNode(pointer); // Let newNode point to a new ListNode
+			newNode = newNode.next;
+		}
+		
     	return startNode;
     }
     
@@ -287,38 +284,40 @@ public class Lists {
     
     // Testmetod: JunitListTest.testConcat()
     public static ListNode concat(ListNode l1,ListNode l2) { // COMPLETE
+    	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to concat");
+    	
     	ListNode nodePtr = new ListNode();
     	nodePtr = l2; 
-   	while(nodePtr.next != null) {
-    		addLast(l1, nodePtr.next.element);			// l2 is head of list and doesn't have any element. So add element of l2.next to l1
-    		removeAll(l2, nodePtr.next.element);		// Remove the copied element and node? 
-    		nodePtr = nodePtr.next; 					// Make nodePtr point to next object (so we can iterate through the list) 
-    }
-   		return l1;
-    }
+    	
+	   	while(nodePtr.next != null) {
+	    		addLast(l1, nodePtr.next.element);			// l2 is head of list and doesn't have any element. So add element of l2.next to l1
+	    		removeAll(l2, nodePtr.next.element);		// Remove the copied element and node? 
+	    		nodePtr = nodePtr.next; 					// Make nodePtr point to next object (so we can iterate through the list) 
+	    }
+	   		return l1;
+	    }
     
     // Testmetod: JunitListTest.testAddAll()
     public static ListNode addAll(ListNode l1,ListNode l2) {
-    	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to addFirst");
+    	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to addAll");
     	
        	while(l2.next != null)
     		addLast(l1, l2.element);
    		return l1;
     }
-      
-    // Testmetod: JunitListTest.testReverse()
-    public static ListNode reverse(ListNode head) {  
-    	if ( head == null ) throw new ListsException("Lists: null passed to reverse");
+     
+    
+    public static ListNode reverse(ListNode head) {
+    	if ( head == null) throw new ListsException("Lists: null passed to reverse");
     	
-        ListNode reversedL = new ListNode();
-        ListNode nodePointer = new ListNode();
+        ListNode reversedHead = new ListNode();	// head of new list to be reversed
+        ListNode nodePtr = new ListNode(); 		// nodePtr that can iterate one list
+        nodePtr = head;
         
-        while(nodePointer.next != null) {
-        	nodePointer = head;
-        	reversedL = nodePointer.next;
-        	reversedL.element = nodePointer.element;
-        	reversedL.next = nodePointer;
+        while(nodePtr.next != null) {
+        	nodePtr = nodePtr.next; 			// Mode nodePtr to next node
+        	reversedHead = addFirst(reversedHead, nodePtr.element); // 
         }
-        return reversedL;
+        return reversedHead;
     }
 }
