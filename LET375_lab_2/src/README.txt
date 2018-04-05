@@ -1,13 +1,13 @@
 LET375 LAB 2 GENERIC CLASSES AND METHODS
 
 Task 1: Generic single object buffer
-We created an interactive test in which the user may put or get objects from a singlebuffer. The user
-may only input strings.
+We created an interactive test in which the user may put or get objects from a singlebuffer.
+The test only works on strings.
 
 
 Task 2: Generic printing method
-Iterators are used since we wanted to learn how to use them, as well as being told to use the standard library
-to as great an extent as possible. 
+Iterators are used since they generalize the iteration process of a collection. Also, we were 
+told to use the standard library to as great an extent as possible. 
 
 ----------------------------------------------------------------------------------------------
 Task 3: Generic class method reverse
@@ -76,16 +76,9 @@ buffer = null
 ----------------------------------------------------------------------------------------------
 
 Task 4: Generic compare class method
-The task description did not explain how strings were to be compared, so we decided to compare
-them according to number of characters. This would also have the same results as the example in the
-description.
-
 The argument comparator is used to compare elements within the two individual argument collections to obtain
 the maximum and minimum elements. Then the argument comparator is used once more to compare the maximum element
-from collection c1 with the minimium element from collection c2.
-
-For comparing both integers and strings, we use the standard compare() method from the Integer class.
-
+from collection c1 with the minimum element from collection c2.
 
 Task 5: A generic filter method
 IsEven class implements Predicate interface and needs to implement the test() method. In this method, the isEven()

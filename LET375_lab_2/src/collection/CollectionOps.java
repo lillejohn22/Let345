@@ -26,20 +26,20 @@ public class CollectionOps {
 	public static <T> List<T> reverse(List<T> l)  { 
 		SingleBuffer<T> buffer = new SingleBuffer<T>();
 		
-		ListIterator<T> iterator1 = l.listIterator(); // to iterate forwards
-		ListIterator<T> iterator2 = l.listIterator(l.size()); // to iterate backwards
+		ListIterator<T> forwardsItr = l.listIterator();
+		ListIterator<T> backwardsItr = l.listIterator(l.size());
 		
-		while ( iterator1.nextIndex() < l.size()/2 ) {
-		 	buffer.put(iterator1.next()); // next() increments counter
-		 	l.set(iterator1.previousIndex(), iterator2.previous()); // previousIndex due to iterator1 incremented
-		 	l.set(iterator2.nextIndex(), buffer.get()); // nextIndex due to iterator2 decremented
+		while ( forwardsItr.nextIndex() < l.size()/2 ) {
+		 	buffer.put(forwardsItr.next()); // next() increments counter
+		 	l.set(forwardsItr.previousIndex(), backwardsItr.previous()); // previousIndex due to forwardsItr
+		 	l.set(backwardsItr.nextIndex(), buffer.get()); // nextIndex due to backwardsItr decremented
 		}
 		return l;
 	}
 
 	public static <T extends Comparable<T>> boolean
 	less( Collection<T> c1, Collection<T> c2, Comparator<T> comp ) {
-		return comp.compare(Collections.max(c1,comp), Collections.min(c2,comp)) == -1;
+		return comp.compare(Collections.max(c1,comp), Collections.min(c2,comp)) < 0;
 	}
     
     public static <T,R> Collection<R>

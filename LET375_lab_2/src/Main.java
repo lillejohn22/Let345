@@ -58,7 +58,7 @@ public class Main {
          resultsIntComp.add(less(list1,list2,intcomp)); // should return true
          resultsIntComp.add(less(list1,list3,intcomp)); // should return false
          resultsIntComp.add(less(list2,list3,intcomp)); // should return false
-         resultsIntComp.add(less(johanneberg,campusLindholmen,stringcomp)); // should return true
+         resultsIntComp.add(less(johanneberg, campusLindholmen, stringcomp)); // should return true
          
          print(resultsIntComp);
          
