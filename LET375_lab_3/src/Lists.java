@@ -98,7 +98,7 @@ public class Lists {
     // ---------------- Uppgifter ----------------- 
     
     // Testmetod: JunitListTest.testToString()
-    public static String toString(ListNode l) { // COMPLETE
+    public static String toString(ListNode l) {
     	
     	// First check if l is a null reference
     	if (l == null) throw new ListsException("Lists: null passed to toString");
@@ -119,7 +119,7 @@ public class Lists {
     }
     
     // Testmetod: JunitListTest.testContains()
-    public static boolean contains(ListNode head, char c) { // COMPLETE
+    public static boolean contains(ListNode head, char c) {
     	if ( head == null ) throw new ListsException("Lists: null passed to contains");
     	
     	ListNode pointer = new ListNode();
@@ -134,24 +134,21 @@ public class Lists {
     }
     
     
-    /* SELF CREATED METHOD
-     * Return a new ListNode whose element is identical to the ListNode that
-     * needs to be copied. However, the "nodetoBeCopied.next" reference is not
-     * copied; newNode.next always reference null
+    /** SELF CREATED METHOD
+     * @Returns copyNode returns a new ListNode that is a copy of the argument ListNode,
+     * but sets the next node to null.
      */
-    public static ListNode copyNode (ListNode nodeToBeCopied) { // COMPLETE
-    	 ListNode newNode = new ListNode();
-    	 newNode.element = nodeToBeCopied.element;
+    public static ListNode copyNode (ListNode l) {
+    	ListNode newNode = new ListNode();
+    	newNode.element = l.element;
     	 
     	return newNode;
     }
     
-    /* SELF CREATED METHOD
-     * Returns a copy of the entire argument linked list,
-     * without manipulating argument list
-     */
-    public static ListNode copyList (ListNode head) { // COMPLETE
-    
+    /** SELF CREATED METHOD
+     @Returns copyList returns a copy of the argument list 
+     **/
+    public static ListNode copyList (ListNode head) {
     	ListNode startNode = new ListNode(); // A new header
     	ListNode pointer = new ListNode();
     	pointer = head;
@@ -159,17 +156,10 @@ public class Lists {
     	// If list "head" only contains header, return a new header
     	if (pointer.next == null) return startNode;
 	
-		/* If there is at least one ListNode (not including header),
-		 * make a copy of that ListNode and append it to the header (startNode).
-		 * This needs only be done once.
-		 */
 		pointer = pointer.next;
 		ListNode newNode = copyNode(pointer);
 		startNode.next = newNode;
-		
-		/* If there are subsequent ListNodes, append copies of these to the new list.
-		 * Note that pointer is pointing at the original list with header "head".
-		 */
+
 		while (pointer.next != null) {
 			pointer = pointer.next;
 			newNode.next = copyNode(pointer); // Let newNode point to a new ListNode
@@ -181,110 +171,72 @@ public class Lists {
     
     
     // Testmetod: JunitListTest.testCopyUpperCase()
-    /* NOTE!!
-     * I do not think we may use the the StringBuilder strategy (the code that is commented out),
-     * since we were told not to shortcut by using string operations. I propose a pointer strategy
-     * using a copy of the argument list (since we may not manipulate it) and two pointers (in
-     * order for the particular strategy two work). This strategy is quite complex and hard to
-     * understand though.
-     */
+ 
     public static ListNode copyUpperCase(ListNode head) {
     	if ( head == null ) throw new ListsException("Lists: null passed to copyUpperCase");
     	if (head.next == null) return new ListNode();
     	
-    	// *******STRINGBUILDER STRATEGY*******
-//    	StringBuilder upperCase = new StringBuilder();
-//    	ListNode pointer = new ListNode();
-//    	pointer.next = head.next;
-//    	
-//    	while (pointer.next != null) {
-//    		pointer = pointer.next; // point to next node in list
-//    		if (Character.isUpperCase(pointer.element)) // Save if capital letter
-//    			upperCase.append(pointer.element);
-//    	}
-//        return toList(upperCase.toString());
-
-    	// ********TWO-POINTER STRATEGY********
-    	ListNode headNode = copyList(head); // Make a copy of the argument linked list. Will be manipulated.
-    	ListNode pointer = headNode; // Start by pointing at header
-    	
-    	/* capitalPointer always points to the latest ListNode with upper case char. It
-    	 * is needed since there may be multiple subsequent nodes containing lower case
-    	 * chars, which we need to step over.
-    	 * Thus, capitalPointer is only incremented when there is a new ListNode with upper
-    	 * case. Note however that capitalPointer.next needs to be updated continuously!
-    	 */
+    	ListNode headNode = copyList(head);
+    	ListNode pointer = headNode;     	
     	ListNode capitalPointer = headNode;
-    	
-    	/* As long as there are subsequent nodes in the list, there are three possible cases:
-    	 * 	1) The next node contains lower case char but IS NOT the last node in the list.
-    	 * 	Thus, we "step over" this node (sort of removes it from the list)
-    	 * 	
-    	 * 	2) The next node contains lower case char and IS the last node in the list.
-    	 * 	Thus, we need to end the list by letting the latest upper case node reference
-    	 * 	null and break the while-loop.
-    	 * 	
-    	 * 	3) The next node contains upper case char. Here we don't need to explicitly
-    	 * 	check for the presence of subsequent nodes, it will be taken care of by the
-    	 * 	outer else-clause and while-loop.
-    	 */
+
     	while (pointer.next != null) {
-    		if ( Character.isLowerCase(pointer.next.element) ) {
+    		if (Character.isUpperCase(pointer.next.element)) {
+    			// CASE 1
+    			pointer = pointer.next;
+    			capitalPointer = capitalPointer.next;    			
+    		}
+    		else {
     			if ( pointer.next.next != null ) {
-    				// CASE 1)
+    				// CASE 2
     				pointer = pointer.next;
     				capitalPointer.next = pointer.next;
     			}
     			else {
-    				// CASE 2)
+    				// CASE 3
     				pointer = pointer.next;
     				capitalPointer.next = null;
     				break;
     			}
     		}
-    		else {
-    			// CASE 3
-    			pointer = pointer.next;
-    			capitalPointer = capitalPointer.next;
-    		}
     	}
     	return headNode;
     }
-    
-
+   
+ 
     // Testmetod: JunitListTest.testAddFirst()
-    public static ListNode addFirst(ListNode l, char c) { // COMPLETE
+    public static ListNode addFirst(ListNode l, char c) {
     	if ( l == null ) throw new ListsException("Lists: null passed to addFirst");
     	
     	ListNode newNode = new ListNode();
-    	newNode.next = l.next; // next node is second ListNode, reference this by newNode.next
-    	l.next = newNode; // Reference newNode instead of previously second ListNode. newNode is now at correct place
+    	newNode.next = l.next;
+    	l.next = newNode;
     	newNode.element = c;
         return l;
     }
          
     // This is a private utility method.
-    private static ListNode getLastNode(ListNode head) { // COMPLETE
-        ListNode nodePtr = head;			// make nodePtr point to head of list 
+    private static ListNode getLastNode(ListNode head) {
+        ListNode nodePtr = head; 
         while(nodePtr.next != null)		 
-        	nodePtr = nodePtr.next;			// move nodePtr to next node   
-        return nodePtr;						// return ptr to last valid node
+        	nodePtr = nodePtr.next;   
+        return nodePtr;
     }
    
     // Testmetod: JunitListTest.testAddLast() 
-    public static ListNode addLast(ListNode l,char c) {  // COMPLETE
+    public static ListNode addLast(ListNode l,char c) {
     	if ( l == null ) throw new ListsException("Lists: null passed to addLast");
     	
-        ListNode newLastNode = new ListNode(); 
-        ListNode LastNode = getLastNode(l); 	// LastNode points to the last element in l
-        LastNode.next = newLastNode;			// Make LastNode point to newLastNode
-        newLastNode.element = c;				// add the element to newLastNode
+        ListNode newLastNode = new ListNode();
+        ListNode LastNode = getLastNode(l);
+        LastNode.next = newLastNode;
+        newLastNode.element = c;
         return l;
     }
     
     
     // Testmetod: JunitListTest.testConcat()
-    public static ListNode concat(ListNode l1,ListNode l2) { // COMPLETE
+    public static ListNode concat(ListNode l1,ListNode l2) { 
     	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to concat");
     	
     	ListNode l2Pointer = new ListNode();
@@ -294,15 +246,14 @@ public class Lists {
     	l1Pointer = getLastNode(l1);
     	
 	   	while(l2Pointer.next != null) {
-  	    		l2Pointer = l2Pointer.next; 		// Make nodePtr point to next object (so we can iterate through the list)
-  	    		l1Pointer.next = l2Pointer;
-  	    		l1Pointer = l1Pointer.next;
+    		l2Pointer = l2Pointer.next;
+    		l1Pointer.next = l2Pointer;
+    		l1Pointer = l1Pointer.next;
 	    }
 	   	
    		l2.next = null;
    		return l1;
 	    }
-    
     
     
     // Testmetod: JunitListTest.testAddAll()
@@ -324,12 +275,12 @@ public class Lists {
     	if ( head == null) throw new ListsException("Lists: null passed to reverse");
     	
         ListNode reversedHead = new ListNode();	// head of new list to be reversed
-        ListNode nodePtr = new ListNode(); 		// nodePtr that can iterate one list
+        ListNode nodePtr = new ListNode();
         nodePtr = head;
         
         while(nodePtr.next != null) {
-        	nodePtr = nodePtr.next; 			// Mode nodePtr to next node
-        	reversedHead = addFirst(reversedHead, nodePtr.element); // 
+        	nodePtr = nodePtr.next;
+        	reversedHead = addFirst(reversedHead, nodePtr.element); 
         }
         return reversedHead;
     }
