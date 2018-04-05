@@ -268,12 +268,10 @@ public class Lists {
          
     // This is a private utility method.
     private static ListNode getLastNode(ListNode head) { // COMPLETE
-    	if ( head == null ) throw new ListsException("Lists: null passed to getLastNode");
-    	
-    	ListNode pointer = head;
-        while(pointer.next != null)
-        	pointer = pointer.next;
-        return pointer;
+        ListNode nodePtr = head;			// make nodePtr point to head of list 
+        while(nodePtr.next != null)		 
+        	nodePtr = nodePtr.next;			// move nodePtr to next node   
+        return nodePtr;						// return ptr to last valid node
     }
    
     // Testmetod: JunitListTest.testAddLast() 
@@ -281,21 +279,22 @@ public class Lists {
     	if ( l == null ) throw new ListsException("Lists: null passed to addLast");
     	
         ListNode newLastNode = new ListNode(); 
-        ListNode LastNode = getLastNode(l); // points to the last element in l.I can't use nodeIterator here right?
-        LastNode.next = newLastNode;
-        newLastNode.element = c;
+        ListNode LastNode = getLastNode(l); 	// LastNode points to the last element in l
+        LastNode.next = newLastNode;			// Make LastNode point to newLastNode
+        newLastNode.element = c;				// add the element to newLastNode
         return l;
     }
     
     // Testmetod: JunitListTest.testConcat()
-    public static ListNode concat(ListNode l1,ListNode l2) {
-    	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to getLastNode");
-    	
-	   	while(l2.next != null) {
-	    		addLast(l1, l2.element);
-	    		removeAll(l2, l2.element);
-	    }
-	   	return l1;
+    public static ListNode concat(ListNode l1,ListNode l2) { // COMPLETE
+    	ListNode nodePtr = new ListNode();
+    	nodePtr = l2; 
+   	while(nodePtr.next != null) {
+    		addLast(l1, nodePtr.next.element);			// l2 is head of list and doesn't have any element. So add element of l2.next to l1
+    		removeAll(l2, nodePtr.next.element);		// Remove the copied element and node? 
+    		nodePtr = nodePtr.next; 					// Make nodePtr point to next object (so we can iterate through the list) 
+    }
+   		return l1;
     }
     
     // Testmetod: JunitListTest.testAddAll()
