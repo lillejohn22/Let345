@@ -191,7 +191,7 @@ public class Lists {
     
     // Testmetod: JunitListTest.testConcat()
     public static ListNode concat(ListNode l1,ListNode l2) {
-    	ListNode nodePtr = new Listnode();
+    	ListNode nodePtr = new ListNode();
     	nodePtr = l2; 
    	while(nodePtr.next != null) {
     		addLast(l1, nodePtr.next.element);			// l2 is head of list and doesn't have any element. So add element of l2.next to l1
