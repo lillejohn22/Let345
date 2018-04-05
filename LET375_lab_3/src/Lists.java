@@ -1,18 +1,18 @@
 /**
  * A collection of utility functions for C style primitive list handling.
  *
- * @author(s)
+ * @author(s) Anton Frigard and Johan Nilsson
  * @version 2016-04-19
  */
 
 public class Lists {
 	
-    // Create an empty list (a null terminated list head).
+    /** Create an empty list (a null terminated list head). */
     public static ListNode mkEmpty() {
         return toList("");
     }
     
-    // Returns true if l refers to a null terminated list head, false ow.
+    /** Returns true if l refers to a null terminated list head/node, false ow. */
     public static boolean isEmpty(ListNode l) {
         if ( l == null )
             throw new ListsException("Lists: null passed to isEmpty");
@@ -20,8 +20,10 @@ public class Lists {
     }
     
 
-    // Two lists are equal if both are empty, or if they have equal lengths
-    // and contain pairwise equal elements at the same positions.
+    /* Two lists are equal if both are empty, or if they have equal lengths
+    	and contain pairwise equal elements at the same positions. */
+    
+    /**Returns true if both lists have same elements in each node */
     public static boolean equals(ListNode l1,ListNode l2) {
         if ( l1 == null || l2 == null )
             throw new ListsException("null passed to equals");
@@ -42,10 +44,11 @@ public class Lists {
         }
     }
     
-    // see lecture slides
+    /** Makes a list out the argument string, see lecture slides 
+      	Each node contains one character each from the input string */
     public static ListNode toList(String chars) {
         ListNode head, ptr1;     // head always points on the list's head (start point). 
-        head = new ListNode();   // Listans head (no data, just a reference to a memory address)
+        head = new ListNode();   // header (no data, just a reference to a memory address)
         head.next = null;
         ptr1 = head;             // ptr points to the last node 
 
@@ -59,7 +62,7 @@ public class Lists {
         return head;
     }
     
-    // See lecture slides
+    /** Returns a copy of the argument ListNode l, see lecture slides */
     public static ListNode copy(ListNode l) {
         if ( l == null )
             throw new ListsException("Lists: null passed to copy");
@@ -74,12 +77,12 @@ public class Lists {
             ptr1 = ptr1.next;              // Move to next 
             ptr1.element = ptr2.element;   // Copy character 
             ptr1.next = null;              // End/terminate the list
-            ptr2 = ptr2.next;              // Move object forward in the orignal list 
+            ptr2 = ptr2.next;              // Move object forward in the original list 
         }
         return head;
     }
     
-    // See lecture slides
+    /** Removes all nodes containing char c from ListNode l, see lecture slides */
     public static ListNode removeAll(ListNode l,char c) {
         if ( l == null )
             throw new ListsException("Lists: null passed to removeAll");
@@ -98,9 +101,8 @@ public class Lists {
     // ---------------- Uppgifter ----------------- 
     
     // Testmetod: JunitListTest.testToString()
+    /** Returns a string made out of the elements in ListNode l*/
     public static String toString(ListNode l) {
-    	
-    	// First check if l is a null reference
     	if (l == null) throw new ListsException("Lists: null passed to toString");
     	
     	// Initiate temporary objects
@@ -119,6 +121,7 @@ public class Lists {
     }
     
     // Testmetod: JunitListTest.testContains()
+    /** returns true if there is a node with char c as element in argument ListNode head */
     public static boolean contains(ListNode head, char c) {
     	if ( head == null ) throw new ListsException("Lists: null passed to contains");
     	
@@ -141,14 +144,16 @@ public class Lists {
     public static ListNode copyNode (ListNode l) {
     	ListNode newNode = new ListNode();
     	newNode.element = l.element;
-    	 
+    	newNode.next = null;
     	return newNode;
     }
     
-    /** SELF CREATED METHOD
-     @Returns copyList returns a copy of the argument list 
-     **/
-    public static ListNode copyList (ListNode head) {
+
+/* REMOVED since copy(ListNode l) does the same 
+ 	// SELF CREATED METHOD
+    // Returns copyList returns a copy of the argument list
+
+   public static ListNode copyList (ListNode head) {
     	ListNode startNode = new ListNode(); // A new header
     	ListNode pointer = new ListNode();
     	pointer = head;
@@ -168,15 +173,36 @@ public class Lists {
 		
     	return startNode;
     }
-    
+*/    
     
     // Testmetod: JunitListTest.testCopyUpperCase()
  
-    public static ListNode copyUpperCase(ListNode head) {
+    public static ListNode copyUpperCase(ListNode head) { // NEEDS OT BE CHECKED FOR ERRORS
     	if ( head == null ) throw new ListsException("Lists: null passed to copyUpperCase");
+    	
+    	ListNode sourcePtr = head;				// to iterate through source 
+    	ListNode upperCaseList = new ListNode();// new list with upperCase chars
+    	ListNode capitalPtr = upperCaseList; 	// to iterate through upperCaseList
+    	
+    	while ( sourcePtr.next != null ) {
+    		sourcePtr = sourcePtr.next;
+    		
+    		// See copy(ListNode l) for more information on how this adds a node 
+    		if ( Character.isUpperCase(sourcePtr.element) ) {
+    			capitalPtr.next = new ListNode(); 		// Make a new node for the list
+    			capitalPtr = capitalPtr.next;			// move pointer to the new node 
+    			capitalPtr.element = sourcePtr.element; // copy element from source to newly made node
+    			// capitalPtr.next = null; 				// I don't see why this needs to be done every time? so I do it at the end. 
+    		}
+    	}
+    	capitalPtr.next = null; // terminate list (once it's been made, instead of after each node is added)
+    	return upperCaseList;
+    }  	
+    
+/*		Old code 
     	if (head.next == null) return new ListNode();
     	
-    	ListNode headNode = copyList(head);
+    	ListNode headNode = copy(head);
     	ListNode pointer = headNode;     	
     	ListNode capitalPointer = headNode;
 
@@ -202,9 +228,10 @@ public class Lists {
     	}
     	return headNode;
     }
-   
+*/
  
     // Testmetod: JunitListTest.testAddFirst()
+    /** Adds a node with the element c in front of ListNode l */
     public static ListNode addFirst(ListNode l, char c) {
     	if ( l == null ) throw new ListsException("Lists: null passed to addFirst");
     	
@@ -216,6 +243,7 @@ public class Lists {
     }
          
     // This is a private utility method.
+    /** returns reference to last node in ListNode head */
     private static ListNode getLastNode(ListNode head) {
         ListNode nodePtr = head; 
         while(nodePtr.next != null)		 
@@ -236,6 +264,7 @@ public class Lists {
     
     
     // Testmetod: JunitListTest.testConcat()
+    /** Relinks nodes from l2 to end of l1 (by rewriting the pointer' values)*/
     public static ListNode concat(ListNode l1,ListNode l2) { 
     	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to concat");
     	
@@ -257,6 +286,7 @@ public class Lists {
     
     
     // Testmetod: JunitListTest.testAddAll()
+    /** Copies elements from ListNode l2 to ListNode l1*/ 
     public static ListNode addAll(ListNode l1,ListNode l2) {
     	if ( l1 == null || l2 == null ) throw new ListsException("Lists: null passed to addAll");
     	
@@ -270,7 +300,7 @@ public class Lists {
    		return l1;
     }
      
-    
+    /** Returns a reverse ordered copy of ListNode head */ 
     public static ListNode reverse(ListNode head) {
     	if ( head == null) throw new ListsException("Lists: null passed to reverse");
     	
