@@ -49,54 +49,54 @@ public class Lists {
     
     // Se f�rel. OH
     public static ListNode toList(String chars) {
-        ListNode head, ptr1;     // head pekar alltid p� listans huvud
-        head = new ListNode();   // Listans huvud (inneh�ller ej data)
+        ListNode head, ptr1;     // head always points on the list's head (start point). 
+        head = new ListNode();   // Listans head (no data, just a reference to a memory address)
         head.next = null;
-        ptr1 = head;             // ptr pekar p� sista noden
+        ptr1 = head;             // ptr points to the last node 
 
-        // Bygg en lista av tecken
+        // Make a list of characters 
         for ( int i = 0; i < chars.length(); i++ ) {
-            ptr1.next = new ListNode();          // Addera en ny nod sist
-            ptr1 = ptr1.next;                    // Flytta fram till den nya noden
-            ptr1.element = chars.charAt(i);      // S�tt in tecknet
-            ptr1.next = null;                    // Avsluta listan
+            ptr1.next = new ListNode();          // Add a new nod at the end of the list 
+            ptr1 = ptr1.next;                    // Move to the freshly made node
+            ptr1.element = chars.charAt(i);      // Add the character 
+            ptr1.next = null;                    // End the list
         }
         return head;
     }
     
-    // Se f�rel. OH
+    // See lecture slides
     public static ListNode copy(ListNode l) {
         if ( l == null )
             throw new ListsException("Lists: null passed to copy");
         ListNode head,ptr1,ptr2;
-        head = new ListNode();             // Kopian
+        head = new ListNode();             // The copy (of a pointer)
         head.next = null;
         ptr1 = head;
 
-        ptr2 = l.next;  // f�rsta listelementet i originallistan
+        ptr2 = l.next;  // First element in the original list (ptr2 points to it) 
         while ( ptr2 != null ) {
-            ptr1.next = new ListNode();    // Ny nod i kopian
-            ptr1 = ptr1.next;              // Flytta fram
-            ptr1.element = ptr2.element;   // Kopiera tecknet
-            ptr1.next = null;              // Avsluta
-            ptr2 = ptr2.next;              // Flytta fram i originallistan
+            ptr1.next = new ListNode();    // New node in the copy 
+            ptr1 = ptr1.next;              // Move to next 
+            ptr1.element = ptr2.element;   // Copy character 
+            ptr1.next = null;              // End/terminate the list
+            ptr2 = ptr2.next;              // Move object forward in the orignal list 
         }
         return head;
     }
     
-    // Se f�rel. OH
+    // See lecture slides
     public static ListNode removeAll(ListNode l,char c) {
         if ( l == null )
             throw new ListsException("Lists: null passed to removeAll");
         ListNode p = l;
         while ( p.next != null ) {
-            ListNode temp = p.next;      // Handtag p� n�sta nod
-            if ( temp.element == c )     // Skall den tas bort?
-                p.next = temp.next;      // L�nka f�rbi
+            ListNode temp = p.next;      // Handle on the next node
+            if ( temp.element == c )     // Remove it? 
+                p.next = temp.next;      // Link previous and follow nodes together (cutting out the current one)
             else
-                p = p.next;              // Nej, g� vidare *
+                p = p.next;              // If not remove --> move to next node
         }
-        // * p f�r ej flyttas om den efterf�ljande noden togs bort!
+        // * p mustn't be moved if the follow node was removed! (messes with the linking of nodes)
         return l;
      }
     
@@ -148,16 +148,17 @@ public class Lists {
     // Testmetod: JunitListTest.testCopyUpperCase()
     public static ListNode copyUpperCase(ListNode head) {
         
-    	StringBuilder upperCase = new StringBuilder();
-    	nodeIterator.next = head.next;
+    	StringBuilder upperCase = new StringBuilder();			// To build a Str for making a the new list
+    	ListNode nodePtr = new ListNode();						// Create a pointer 
+    	nodePtr.next = head.next;								// nodePtr --> to next object in list
     	
-    	while (nodeIterator.next != null) {
-    		nodeIterator = nodeIterator.next;
-    		if ( Character.isUpperCase(nodeIterator.element) )
-    			upperCase.append(nodeIterator.element);
+    	while (nodePtr.next != null) {							// unless list is empty do	(ptr points to null)
+    		nodePtr = nodePtr.next;								// make nodePtr point at the next node 
+    		if ( Character.isUpperCase(nodePtr.element) )		 
+    			upperCase.append(nodePtr.element);				// add it to Str upperCase
     	}
     	
-        return toList(upperCase.toString());
+        return toList(upperCase.toString());					
     }
     
     // Testmetod: JunitListTest.testAddFirst()
