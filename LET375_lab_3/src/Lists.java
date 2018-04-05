@@ -165,10 +165,10 @@ public class Lists {
     public static ListNode addFirst(ListNode l, char c) {
     	if ( l == null ) throw new ListsException("Lists: null passed to addFirst"); // catches null pointers in argument
     	
-    	ListNode nodePtr = new ListNode();
-    	nodePtr.next = l.next;		// Make nodePtr point to first node in l, (l is head of list) 
-    	l.next = nodePtr;			// Now next node is nodePtr
-    	nodePtr.element = c;		// Add element to nodePtr
+    	ListNode newFirstNode = new ListNode(); 	// make new node
+    	newFirstNode.next = l.next;					// Make newFirstNode point to first node in l, (l is head of list) 
+    	l.next = newFirstNode;						// Now next node in l is newFirstNode 
+    	newFirstNode.element = c;					// Add element to newFirstNode 
         return l;
     }
          
@@ -176,24 +176,27 @@ public class Lists {
     private static ListNode getLastNode(ListNode head) {
         ListNode nodePtr = head;			// make nodePtr point to head of list 
         while(nodePtr.next != null)		 
-        	nodePtr = nodePtr.next;			// mode nodePtr to next node   
+        	nodePtr = nodePtr.next;			// move nodePtr to next node   
         return nodePtr;						// return ptr to last valid node
     }
    
     // Testmetod: JunitListTest.testAddLast() 
     public static ListNode addLast(ListNode l,char c) {  
         ListNode newLastNode = new ListNode(); 
-        ListNode LastNode = getLastNode(l); // points to the last element in l.I can't use nodeIterator here right?
-        LastNode.next = newLastNode;
-        newLastNode.element = c;
+        ListNode LastNode = getLastNode(l); 	// LastNode points to the last element in l
+        LastNode.next = newLastNode;			// Make LastNode point to newLastNode
+        newLastNode.element = c;				// add the element to newLastNode
         return l;
     }
     
     // Testmetod: JunitListTest.testConcat()
-    public static ListNode concat(ListNode l1,ListNode l2) { 
-   	while(l2.next != null) {
-    		addLast(l1, l2.element);
-    		removeAll(l2, l2.element);
+    public static ListNode concat(ListNode l1,ListNode l2) {
+    	ListNode nodePtr = new Listnode();
+    	nodePtr = l2; 
+   	while(nodePtr.next != null) {
+    		addLast(l1, nodePtr.next.element);			// l2 is head of list and doesn't have any element. So add element of l2.next to l1
+    		removeAll(l2, nodePtr.next.element);		// Remove the copied element and node? 
+    		nodePtr = nodePtr.next; 					// Make nodePtr point to next object (so we can iterate through the list) 
     }
    		return l1;
     }
