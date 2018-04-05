@@ -19,7 +19,7 @@ public class Lists {
         return l.next == null;
     }
     
-
+    
     /* Two lists are equal if both are empty, or if they have equal lengths
     	and contain pairwise equal elements at the same positions. */
     
