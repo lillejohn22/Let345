@@ -10,7 +10,7 @@ public class WordLists {
 	private HashMap<String, Integer> unsortedDict = new HashMap<String, Integer>(); // every dict is based on this
 	private TreeMap<String, Integer> alfaSortedDict = new TreeMap<String, Integer>();
 	TreeSet<String> backwardsSortedDict = new TreeSet<String>(new ReverseStringComparator());
-	private Map<Integer,TreeSet<String>> freqSortedDict;
+	private Set<Map<String, Integer>> freqSortedDict;
 
 	
 	private Reader in = null;
@@ -20,7 +20,7 @@ public class WordLists {
 	public WordLists(String textFileName) throws IOException {
 	    File textFile = new File(textFileName);
 	    in = new BufferedReader(new FileReader(textFile));
-	    this.computeWordFrequencies();
+	    this.createUnsortedDict();
 	}
 	
 	private boolean isPunctuationChar(char c) {
@@ -70,7 +70,7 @@ public class WordLists {
 	// Computes the number of occurrences of a word using the "base" dictionary unsortedDict.
 	// After calling, unsortedDict contains words (that are unsorted due to HashMap) mapped
 	// to their respective number of occurrences.
-	private void computeWordFrequencies() throws IOException{
+	private void createUnsortedDict() throws IOException{
 	    String word;
 	    while ( (word = getWord()) != null ) {
 	    		if ( unsortedDict.containsKey(word)) {
@@ -80,6 +80,8 @@ public class WordLists {
 	    			unsortedDict.put(word, 1);
 	    }
 	}
+	
+	
 
 	// Compute backwards dictionary. No need to care about number of occurrences (see lab descr.)
 	private void computeBackwardsOrder() {
@@ -90,13 +92,21 @@ public class WordLists {
 	// Compute frequency dictionary. 
 	private void computeFrequencyMap() {
 		
-		freqSortedDict = new TreeMap<Integer,TreeSet<String>>(new ReverseIntegerComparator());
+		Set<String> tempSet = new TreeSet<String>();
+		freqSortedDict = new TreeSet<Map<String,Integer>>(new FreqComparator());
+		
 		
 		// Determine frequency map
 		for ( String word : unsortedDict.keySet() ) {
+			workMap.put(word, unsortedDict.get(word)); // fetch word and frequency, create temp HashMap
 			
+			 // Create new HashMap to avoid using a reference to a Map as element,
+			// we want the element to be an actual object. Add element to dictionary.
+			freqSortedDict.add(new HashMap<String, Integer>(workMap));
+			
+			// Clear reference to enable reuse
+			workMap.clear();
 		}
-		
 	}
 			
 	
