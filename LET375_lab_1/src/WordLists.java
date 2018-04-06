@@ -1,4 +1,4 @@
-// Author(s): Anton Frigård, Johan Nilssom
+// Author(s): Anton Frig�rd, Johan Nilssom
 // Version: 1
 // Date:	 2018-03-25
 import java.io.*;
@@ -58,14 +58,14 @@ public class WordLists {
 	}
 	
 	// Returns a Set with every word in reverse
-//	private List<String> reverseAllWords( Collection<String> argCollection ) {
-//		List<String> tempList = new LinkedList<String>();
-//		for ( String word : argCollection ) {
-//    			word = new StringBuilder(word).reverse().toString(); // Reverse word
-//    			tempList.add(word); 
-//		}
-//    			return tempList;
-//	}
+	private List<String> reverseAllWords( Collection<String> argCollection ) {
+		List<String> tempList = new LinkedList<String>();
+		for ( String word : argCollection ) {
+    			word = new StringBuilder(word).reverse().toString(); // Reverse word
+    			tempList.add(word); 
+		}
+    			return tempList;
+	}
 
 	// Computes the number of occurrences of a word using the "base" dictionary unsortedDict.
 	// After calling, unsortedDict contains words (that are unsorted due to HashMap) mapped
@@ -149,10 +149,9 @@ public class WordLists {
 	
 	public static void main(String[] args) {
 		try {
-		WordLists wl = new WordLists("dictionary.txt");
+		WordLists wl = new WordLists(args[0]);
 
 		// Needed to compute each dictionary type. Instantiates a Set called unsortedDict.
-		//wl.computeWordFrequencies();
 		
 		// Convert from HashMap (unsortedDict) to TreeMap (alfaSortedDict) to get alphabetical sorting.
 	    wl.alfaSortedDict.putAll(wl.unsortedDict);
@@ -174,20 +173,6 @@ public class WordLists {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
