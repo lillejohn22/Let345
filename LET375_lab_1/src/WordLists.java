@@ -9,8 +9,9 @@ public class WordLists {
 	// Instance variables
 	private HashMap<String, Integer> unsortedDict = new HashMap<String, Integer>(); // every dict is based on this
 	private TreeMap<String, Integer> alfaSortedDict = new TreeMap<String, Integer>();
-	private List<String> backwardsSortedDict = new LinkedList<String>();
+	TreeSet<String> backwardsSortedDict = new TreeSet<String>(new ReverseStringComparator());
 	private Set<Map<String, Integer>> freqSortedDict;
+
 	
 	private Reader in = null;
 	Map<String, Integer> workMap = new HashMap<String, Integer>(); // used for computing
@@ -81,25 +82,16 @@ public class WordLists {
 
 	// Compute backwards dictionary. No need to care about number of occurrences (see lab descr.)
 	private void computeBackwardsOrder() {
-		// Two data structures used for computation
-		TreeSet<String> workSet = new TreeSet<String>();
-		TreeMap<String, Integer> workMap = new TreeMap<String, Integer>();
-		
-		workMap.putAll(unsortedDict); // Automatically alphabetically sorted
-		
-		 // A SET of sorted (by last character) words (that are reversed):
-		workSet.addAll(reverseAllWords(workMap.keySet()));
-		
-		// A LIST of sorted (by last character) words (that are not reversed):
-		backwardsSortedDict.addAll(reverseAllWords(workSet));
+		backwardsSortedDict.addAll(unsortedDict.keySet());
 		}
 	
 	
 	// Compute frequency dictionary. 
 	private void computeFrequencyMap() {
-		// A sorted set, where elements are Map with only one entry each. Comparator
-		//class FreqComparator is used to sort according to frequency.
-		freqSortedDict = new TreeSet<Map<String, Integer>>(new FreqComparator());
+		
+		Set<String> tempSet = new TreeSet<String>();
+		freqSortedDict = new TreeSet<Map<String,Integer>>(new FreqComparator());
+		
 		
 		// Determine frequency map
 		for ( String word : unsortedDict.keySet() ) {
