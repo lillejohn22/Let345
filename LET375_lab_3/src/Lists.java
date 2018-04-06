@@ -136,6 +136,7 @@ public class Lists {
     
         
     // Testmetod: JunitListTest.testCopyUpperCase()
+    /** Copies every node that has an UpperCase char from the arugment ListNode head */ 
     public static ListNode copyUpperCase(ListNode head) {
     	if ( head == null ) throw new ListsException("Lists: null passed to copyUpperCase");
     	
