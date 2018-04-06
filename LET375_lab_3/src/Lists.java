@@ -49,7 +49,7 @@ public class Lists {
     public static ListNode toList(String chars) {
         ListNode head, ptr1;     // head always points on the list's head (start point). 
         head = new ListNode();   // header (no data, just a reference to a memory address)
-        head.next = null;
+        
         ptr1 = head;             // ptr points to the last node 
 
         // Make a list of characters 
@@ -152,7 +152,7 @@ public class Lists {
     			capitalPtr.element = sourcePtr.element;
     		}
     	}
-    	capitalPtr.next = null; // terminate list
+    	// capitalPtr.next = null; // terminate list, IS THIS REALLY NECESSARY, see README.TXT 
     	return upperCaseList;
     }  	
 
