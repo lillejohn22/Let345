@@ -11,4 +11,9 @@ Link together ListNode that l1Pointer points to with the ListNode that l2Pointer
 l1Pointer always points to the last node in the list l1. 
 
 QUESTION: Why do you explicitly set a new node's next reference to null when it's already null?
-		EX:    
+		EX: 
+Line 76		ptr1.next = new ListNode();    // New node in the copy 
+Line 77 	ptr1 = ptr1.next;              // Move to next 
+Line 78 	ptr1.element = ptr2.element;   // Copy character 
+Line 79 	ptr1.next = null;              // End/terminate the list
+Line 80		ptr2 = ptr2.next;              // Move object forward in the original list    
