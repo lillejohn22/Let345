@@ -105,20 +105,18 @@ public class Lists {
     public static String toString(ListNode l) {
     	if (l == null) throw new ListsException("Lists: null passed to toString");
     	
-    	// Initiate temporary objects
     	StringBuilder text = new StringBuilder();
     	ListNode pointer = new ListNode();
     	
-    	// Let pointer.next reference first ListNode after header
-    	pointer.next = l.next;
+    	pointer.next = l.next; // Let pointer.next reference first ListNode after header
     	
-    	// Step through list and append characters to a string
     	while (pointer.next != null) {
-    		pointer = pointer.next; // step to next ListNode
-    		text.append(Character.toString(pointer.element)); // append that node's character to string
+    		pointer = pointer.next;
+    		text.append(Character.toString(pointer.element));
     	}
     	return text.toString();    	
     }
+    
     
     // Testmetod: JunitListTest.testContains()
     /** returns true if there is a node with char c as element in argument ListNode head */
@@ -136,48 +134,9 @@ public class Lists {
     	return false;
     }
     
-    
-    /** SELF CREATED METHOD
-     * @Returns copyNode returns a new ListNode that is a copy of the argument ListNode,
-     * but sets the next node to null.
-     */
-    public static ListNode copyNode (ListNode l) {
-    	ListNode newNode = new ListNode();
-    	newNode.element = l.element;
-    	newNode.next = null;
-    	return newNode;
-    }
-    
-
-/* REMOVED since copy(ListNode l) does the same 
- 	// SELF CREATED METHOD
-    // Returns copyList returns a copy of the argument list
-
-   public static ListNode copyList (ListNode head) {
-    	ListNode startNode = new ListNode(); // A new header
-    	ListNode pointer = new ListNode();
-    	pointer = head;
-    	
-    	// If list "head" only contains header, return a new header
-    	if (pointer.next == null) return startNode;
-	
-		pointer = pointer.next;
-		ListNode newNode = copyNode(pointer);
-		startNode.next = newNode;
-
-		while (pointer.next != null) {
-			pointer = pointer.next;
-			newNode.next = copyNode(pointer); // Let newNode point to a new ListNode
-			newNode = newNode.next;
-		}
-		
-    	return startNode;
-    }
-*/    
-    
+        
     // Testmetod: JunitListTest.testCopyUpperCase()
- 
-    public static ListNode copyUpperCase(ListNode head) { // NEEDS OT BE CHECKED FOR ERRORS
+    public static ListNode copyUpperCase(ListNode head) {
     	if ( head == null ) throw new ListsException("Lists: null passed to copyUpperCase");
     	
     	ListNode sourcePtr = head;				// to iterate through source 
@@ -187,48 +146,16 @@ public class Lists {
     	while ( sourcePtr.next != null ) {
     		sourcePtr = sourcePtr.next;
     		
-    		// See copy(ListNode l) for more information on how this adds a node 
     		if ( Character.isUpperCase(sourcePtr.element) ) {
-    			capitalPtr.next = new ListNode(); 		// Make a new node for the list
-    			capitalPtr = capitalPtr.next;			// move pointer to the new node 
-    			capitalPtr.element = sourcePtr.element; // copy element from source to newly made node
-    			// capitalPtr.next = null; 				// I don't see why this needs to be done every time? so I do it at the end. 
+    			capitalPtr.next = new ListNode();
+    			capitalPtr = capitalPtr.next; 
+    			capitalPtr.element = sourcePtr.element;
     		}
     	}
-    	capitalPtr.next = null; // terminate list (once it's been made, instead of after each node is added)
+    	capitalPtr.next = null; // terminate list
     	return upperCaseList;
     }  	
-    
-/*		Old code 
-    	if (head.next == null) return new ListNode();
-    	
-    	ListNode headNode = copy(head);
-    	ListNode pointer = headNode;     	
-    	ListNode capitalPointer = headNode;
 
-    	while (pointer.next != null) {
-    		if (Character.isUpperCase(pointer.next.element)) {
-    			// CASE 1
-    			pointer = pointer.next;
-    			capitalPointer = capitalPointer.next;    			
-    		}
-    		else {
-    			if ( pointer.next.next != null ) {
-    				// CASE 2
-    				pointer = pointer.next;
-    				capitalPointer.next = pointer.next;
-    			}
-    			else {
-    				// CASE 3
-    				pointer = pointer.next;
-    				capitalPointer.next = null;
-    				break;
-    			}
-    		}
-    	}
-    	return headNode;
-    }
-*/
  
     // Testmetod: JunitListTest.testAddFirst()
     /** Adds a node with the element c in front of ListNode l */
