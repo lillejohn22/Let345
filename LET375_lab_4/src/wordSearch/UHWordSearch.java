@@ -28,8 +28,8 @@ public class UHWordSearch {
     private BufferedReader in = new BufferedReader( new InputStreamReader( System.in ) );
     private Search searchAlg;   
     private final boolean PRINT_WORDS = false;		// turns printing on/off
-    private final boolean PREFIX_TESTING = false;	// turns prefix testing on/off, on => binary search
-    private boolean BINARY_SEARCH = false;			// true => binary search, false => linear search
+    private final boolean PREFIX_TESTING = true;	// turns prefix testing on/off, on => binary search
+    private boolean BINARY_SEARCH = true;			// true => binary search, false => linear search
    
     /**
      * Constructor for WordSearch class.
