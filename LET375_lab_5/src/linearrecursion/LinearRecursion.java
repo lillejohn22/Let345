@@ -58,15 +58,21 @@ public class LinearRecursion {
     }
 
 // A.4
- public static ListNode copy( ListNode l ) { // COMPLETE
-	 // First assignment is base case, second is recursive case
-	 return ( l == null ) ? null : cons(l.element, l.next);
+ public static ListNode copy( ListNode l ) {
+	 // First assignment is base case (l == null), second is recursive case
+	 return (l == null ) ? null : cons(l.element, copy(l.next));
  }
     
 // A.5  
- public static ListNode append( ListNode l1, ListNode l2 ) {
-        // toDo
-        return null;
+ public static ListNode append(ListNode l1, ListNode l2 ) {
+	 
+	 if(l1 == null)			// base case
+		 return copy(l2);
+	 else {
+		 if( l1.next == null )
+			 return append(null,l2);
+		return append(cons(l1.element, l1.next), cons(l1.next.element, l1.next.next));
+	 }
  }
     
 /**********************************************
@@ -101,25 +107,25 @@ public class LinearRecursion {
             cons(4,cons(5,cons(6,null)))    // [4,5,6]
         };
        
-      System.out.println("\nIn the test cases below, you should verify that"); 
-      System.out.println("the ll[i] printouts are consistent with the definitions"); 
-      System.out.println("of the lists in the ll array. Those lists must not be"); 
-      System.out.println("changed by your functions."); 
+//      System.out.println("\nIn the test cases below, you should verify that"); 
+//      System.out.println("the ll[i] printouts are consistent with the definitions"); 
+//      System.out.println("of the lists in the ll array. Those lists must not be"); 
+//      System.out.println("changed by your functions."); 
 
-      System.out.println("\nTesting copy:");    
-      for ( int i = 0; i < ll.length; i++ ) {
-          ListNode copy = cons(999,copy(ll[i]));
-          print("cons(999,copy(ll["+i+"]))", copy);       // result
-          print("ll["+i+"]",ll[i]); // original should be untouched
-      }
+//      System.out.println("\nTesting copy:");    
+//      for ( int i = 0; i < ll.length; i++ ) {
+//          ListNode copy = cons(999,copy(ll[i]));
+//          print("cons(999,copy(ll["+i+"]))", copy);       // result
+//          print("ll["+i+"]",ll[i]); // original should be untouched
+//      }
 // A.5     
-//         System.out.println("\nTesting append from left:"); 
-//         for ( int i = 0; i < ll.length - 1; i++ ) {
-//             ListNode appended = append(ll[i],ll[ll.length-1]);
-//             print("append(ll["+i+"],ll["+(ll.length-1)+"])",appended);       // result
-//             print("ll["+i+"]",ll[i]); // original should be untouched
-//             print("ll["+(ll.length-1)+"]",ll[ll.length-1]); // original should be untouched
-//         }
+         System.out.println("\nTesting append from left:"); 
+         for ( int i = 0; i < ll.length - 1; i++ ) {
+             ListNode appended = append(ll[i],ll[ll.length-1]);
+             print("append(ll["+i+"],ll["+(ll.length-1)+"])",appended);       // result
+             print("ll["+i+"]",ll[i]); // original should be untouched
+             print("ll["+(ll.length-1)+"]",ll[ll.length-1]); // original should be untouched
+         }
 //         
 //         System.out.println("\nTesting append from right:"); 
 //         for ( int i = 0; i < ll.length - 1; i++ ) {

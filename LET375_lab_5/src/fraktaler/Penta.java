@@ -4,14 +4,11 @@ public class Penta extends Flake {
 
 	public void draw( Turtle turtle, int n, double size ) {
 		this.turtle = turtle;
-		turtle.turnTo(0.0);
-		
-		turtle.turn(-31.0);
-		drawSide(n,size);
+		turtle.turnTo(31.0);
 		
 		for( int i = 1; i <= 4; i++ ) {
 			turtle.turn(-72.0);
-			drawSide(n,size);	
+			drawSide(n, size);	
 		}
 	}
 
@@ -21,15 +18,15 @@ public class Penta extends Flake {
 		else {						// Recursive case
 			double l = size/4.0;
 			drawSide(n-1,l);
-			turtle.turn(108.0);
+			turtle.turn(-108.0);
 			drawSide(n-1,l);
-			turtle.turn(-72);
+			turtle.turn(72);
 			drawSide(n-1,l);
-			turtle.turn(-72);
+			turtle.turn(72);
 			drawSide(n-1,l);
-			turtle.turn(-72);
+			turtle.turn(72);
 			drawSide(n-1,l);
-			turtle.turn(108);
+			turtle.turn(-108);
 			drawSide(n-1,l);
 		}
 	}

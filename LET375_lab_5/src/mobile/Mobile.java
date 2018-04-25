@@ -48,38 +48,70 @@ public class Mobile {
 	}  
 	
 	// Print the leaves of the mobile
-	public void flatten()  { // JOHAN'S TASK
-	      // ...
+	public void flatten()  {
+		
+		if( this.type == MobileType.SIMPLE )		// Base case
+			System.out.println(this.weight);
+		else {										// Recursive case
+			this.left.flatten();
+			this.right.flatten();
+		}	
 	}  
 	
 //	Print a structured view of the mobile
-	public void prettyPrint() { // JOHAN'S TASK
-	      // ...
+	public void prettyPrint() {
+		
+	    if( this.type == MobileType.SIMPLE )		// Base case
+	    	System.out.printf( "(%.0f)", this.getWeight());
+	    else { 										// Recursive case
+	    	System.out.print("[");
+	    	this.left.prettyPrint();
+	    	System.out.printf(", %.0f, ", this.leftLength);
+	    	System.out.printf("%.0f, ", this.rightLength);
+	       	this.right.prettyPrint();
+	       	System.out.print("]");
+	    }
 	}
 	
 // Determine if the mobile is balanced
-	public boolean isBalanced() { 
-		final double eps = 0.000001;
-		return isSimple() ||
-		    left.isBalanced() && right.isBalanced() &&
-		        Math.abs( leftLength * left.getWeight() -
-				rightLength * right.getWeight() ) < eps;
-	}   
+    public boolean isBalanced() {
+        return isSimple() ||
+        left.isBalanced() && right.isBalanced() &&
+        leftLength * left.getWeight() == rightLength * right.getWeight();
+    }   
 	
+    public boolean equals(Mobile m1, Mobile m2) { // NOT COMPLETE
+    	
+    	if( m1.type == MobileType.SIMPLE && m2.type == MobileType.SIMPLE )
+    		return ( m1.weight == m2.weight );
+    	
+    	if( m1.type == MobileType.COMPOSITE && m2.type == MobileType.COMPOSITE ) {
+    		if( m1.leftLength == m2.leftLength && m1.rightLength == m2.rightLength)
+    			return equals(m1.left, m2.left) && equals(m1.right, m2.right);
+    	}
+    	else
+    		return false;
+    	return false;
+    }
+
+    
 //	Return a clone of this mobile
-	public Mobile clone() { // ANTON'S TASK
+	public Mobile clone() {
          // ...
          return null;
 	}
 	
 // Change this mobile to its mirror image
-	public void mirror() { // ANTON'S TASK		(may work, cannot test)
+	public void mirror() {
 		
-		if( this.type == MobileType.SIMPLE )		// Base case
+		if( this.type == MobileType.SIMPLE )
 			return;
-		else {										// Recursive case
+		else {
+			this.left.mirror();
+			this.right.mirror();
+			Mobile temp = this.left;
 			this.left = this.right;
-			this.right = this.left;
+			this.right = temp;
 		}
 	}
 	
@@ -96,7 +128,7 @@ public class Mobile {
 		System.out.println("Height:     " + m.getHeight() );
 		
 //		m.flatten(); System.out.println();
-//		m.prettyPrint(); System.out.println();
+		m.prettyPrint(); System.out.println();
 //		if ( m.isBalanced() )
 //			System.out.println("Balanced!");
 //		else
