@@ -1,4 +1,8 @@
 .vscode/tasks.json
 .vscode/launch.json
 .vscode/settings.json
-
+LET375_lab_1/bin/*
+LET375_lab_2/bin/*
+LET375_lab_3/bin/*
+LET375_lab_4/bin/*
+LET375_lab_5/bin/*
