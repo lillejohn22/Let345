@@ -57,10 +57,10 @@ public class UHWordSearch {
     {
         searchAlg = BINARY_SEARCH ? new BinarySearch() : new LinearSearch();
         int matches = 0;
-        for( int r = 0; r < rows; r++ )
-            for( int c = 0; c < columns; c++ )
-                for( int rd = -1; rd <= 1; rd++ )
-                    for( int cd = -1; cd <= 1; cd++ )
+        for( int r = 0; r < rows; r++ ) // N
+            for( int c = 0; c < columns; c++ ) // N
+                for( int rd = -1; rd <= 1; rd++ ) // C
+                    for( int cd = -1; cd <= 1; cd++ ) // C
                         if( rd != 0 || cd != 0 )
                             matches += solveDirection( r, c, rd, cd );
         searchAlg.printStatistics();
@@ -160,7 +160,7 @@ public class UHWordSearch {
      * Checks to ensure that the grid is rectangular.
      * Checks to make sure that capacity is not exceeded is omitted.
      */
-    private void readPuzzle( ) throws IOException
+    private void readPuzzle( ) throws IOException // O(M) eller O(M^2) tid?
     {
         String oneLine;
         List<String> puzzleLines = new ArrayList<String>( );
@@ -171,7 +171,7 @@ public class UHWordSearch {
         columns = oneLine.length( );
         puzzleLines.add( oneLine );
 
-        while( ( oneLine = puzzleStream.readLine( ) ) != null )
+        while( ( oneLine = puzzleStream.readLine( ) ) != null ) // O(M) eller O(M^2)?
         {
             if( oneLine.length( ) != columns )
                 System.err.println( "Puzzle is not rectangular; skipping row" );
@@ -191,14 +191,14 @@ public class UHWordSearch {
      * Routine to read the dictionary.
      * Error message is printed if dictionary is not sorted.
      */
-    private void readWords( ) throws IOException
+    private void readWords( ) throws IOException // O(M)+O(M) = O(M)
     {
         List<String> words = new ArrayList<String>( );
 
         String lastWord = null;
         String thisWord;
         
-        while( ( thisWord = wordStream.readLine( ) ) != null )
+        while( ( thisWord = wordStream.readLine( ) ) != null ) // O(M) tid?
         {
             if( lastWord != null && thisWord.compareTo( lastWord ) < 0 )
             {
@@ -212,7 +212,7 @@ public class UHWordSearch {
         }
         
         theWords = new String[ words.size( ) ];
-           theWords = words.toArray( theWords );
+           theWords = words.toArray( theWords ); // O(M) tid?
 		System.out.println( words.size() + " words loaded, max word length " 
                                   +  maxWordLength );
     }

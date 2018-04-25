@@ -12,7 +12,7 @@ public class MaxSumTwoDimensions {
     private static Random random = new Random();
     
     // O(n^6)
-    public static int maxSubMatrixSumBad( int[][] a ) { // COMPLETE
+    public static int maxSubMatrixSumBad( int[][] a ) {
         int maxSum = 0;
 
         for( int r1 = 0; r1 < a.length; r1++ ) // start row
@@ -35,7 +35,7 @@ public class MaxSumTwoDimensions {
     }
  
     // O(n^5)
-    public static int maxSubMatrixSumBetter( int[][] a ) { // COMPLETE
+    public static int maxSubMatrixSumBetter( int[][] a ) {
         int maxSum = 0;
 
         for( int r1 = 0; r1 < a.length; r1++ )
@@ -54,7 +54,7 @@ public class MaxSumTwoDimensions {
     }
     
     // O(n^4)
-    public static int maxSubMatrixSumEvenBetter( int[][] a ) { // COMPLETE
+    public static int maxSubMatrixSumEvenBetter( int[][] a ) {
 
     	int maxSum = 0;
     	int thisSum = 0;
@@ -100,14 +100,14 @@ public class MaxSumTwoDimensions {
             {-5,10,-2,1},
             {4,5,-7,1}
         };
-         test(sampleMatrix);
+//         test(sampleMatrix);
          
          // Our own test matrix, all negative elements
          int[][] negativeMatrix = {
         		 {-1,-2,-6},
         		 {-7,-9,-2}
          };
-         test(negativeMatrix);
+//         test(negativeMatrix);
             
         int[][] matrix_10x10 = {    // max sum is 213
             {39,-33,-5,-21,-31,-33,31,32,37,-37},
@@ -121,7 +121,7 @@ public class MaxSumTwoDimensions {
             {17,-50,33,-21,-30,-44,-28,-12,-37,-6},
             {-35,35,-27,44,-42,24,36,43,-49,-46}
         };
-         test(matrix_10x10);
+//         test(matrix_10x10);
         
         int[][] matrix_20x20 = {    // max sum is 346
         	{39,19,39,21,-19,-40,-20,9,-29,42,-48,46,-7,31,-50,-41,5,11,30,23},
@@ -145,13 +145,13 @@ public class MaxSumTwoDimensions {
         	{-11,-9,-48,43,13,-47,-1,-32,-45,-10,-22,-26,36,20,-27,44,29,6,18,-28},
         	{28,46,46,-4,-6,-16,-38,-46,-49,-46,-38,-38,2,46,3,49,-12,-11,-9,31}
         };
-         test(matrix_20x20);
+         //test(matrix_20x20);
         
         // Test the algorithms for random matrixes of increasing sizes.
-//        for ( int size = 1; size <= 2048; size *= 2 ) {
-//            int[][] m = randMatrix(size,size);
-//            System.out.println("\nSize = " + size);
-//            test(m);
-//        }
+        for ( int size = 1; size <= 2048; size *= 2 ) {
+            int[][] m = randMatrix(size,size);
+            System.out.println("\nSize = " + size);
+            test(m);
+        }
     }
 }
