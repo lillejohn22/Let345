@@ -2,6 +2,6 @@
 /.settings/
 .project
 .classpath
-.vscode/
+.vscode/*
 *.class
 *.ctxt
