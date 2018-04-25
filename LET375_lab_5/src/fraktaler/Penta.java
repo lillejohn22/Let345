@@ -13,7 +13,7 @@ public class Penta extends Flake {
 	}
 
 	private void drawSide( int n, double size ) {
-		if( n <= 0 )				// Base case
+		if( n <= 0 )				// Base casee
 			turtle.walk(size);
 		else {						// Recursive case
 			double l = size/4.0;

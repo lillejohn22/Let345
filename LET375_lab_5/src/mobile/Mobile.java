@@ -80,7 +80,7 @@ public class Mobile {
         leftLength * left.getWeight() == rightLength * right.getWeight();
     }   
 	
-    public boolean equals(Mobile m1, Mobile m2) { // NOT COMPLETE
+    public boolean equals(Mobile m1, Mobile m2) { // NOT COMPLETEE
     	
     	if( m1.type == MobileType.SIMPLE && m2.type == MobileType.SIMPLE )
     		return ( m1.weight == m2.weight );

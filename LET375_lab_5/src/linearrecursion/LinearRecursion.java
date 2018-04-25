@@ -99,7 +99,7 @@ public class LinearRecursion {
 //      System.out.println(countDigits(12345));
         
 // A.4  
-        // An array of some test lists
+        // An array of some test listss
         ListNode[] ll = {
             null,                           // []
             cons(1,null),                   // [1]
