@@ -19,9 +19,6 @@ public class LinearRecursion {
     }
         
 // A.2
-//    0 * n = 0
-//    (m+1) * n = n + m * n
-//    (-m) * n = - (m * n)
     public static int multiply(int m, int n) { // COMPLETE
     	m = ( n < 0 ) ? -m : m;
     	n = Math.abs(n);
@@ -64,16 +61,16 @@ public class LinearRecursion {
  }
     
 // A.5  
- public static ListNode append(ListNode l1, ListNode l2 ) {
+ public static ListNode append(ListNode l1, ListNode l2 ) { // INCOMPLETE
 	 
-	 if(l1 == null)			// base case
-		 return copy(l2);
-	 else {
-		 if( l1.next == null )
-			 return append(null,l2);
-		return append(cons(l1.element, l1.next), cons(l1.next.element, l1.next.next));
-	 }
+	 // Special case
+	 if( l1 == null ) return copy(l2);
+	 
+	 // First is base case, second is recursive case
+	 return (l1.next == null) ? cons(l1.element, copy(l2)) : cons(l1.element, append(l1.next, l2)); 
  }
+	 
+ 
     
 /**********************************************
  * Some test cases.
@@ -126,13 +123,13 @@ public class LinearRecursion {
              print("ll["+i+"]",ll[i]); // original should be untouched
              print("ll["+(ll.length-1)+"]",ll[ll.length-1]); // original should be untouched
          }
-//         
-//         System.out.println("\nTesting append from right:"); 
-//         for ( int i = 0; i < ll.length - 1; i++ ) {
-//             ListNode appended = append(ll[ll.length-1],ll[i]);
-//             print("append(ll["+(ll.length-1)+"],ll["+i+"])",appended);       // result
-//             print("ll["+(ll.length-1)+"]",ll[ll.length-1]); // original should be untouched
-//             print("ll["+i+"]",ll[i]); // original should be untouched
-//         }
+         
+         System.out.println("\nTesting append from right:"); 
+         for ( int i = 0; i < ll.length - 1; i++ ) {
+             ListNode appended = append(ll[ll.length-1],ll[i]);
+             print("append(ll["+(ll.length-1)+"],ll["+i+"])",appended);       // result
+             print("ll["+(ll.length-1)+"]",ll[ll.length-1]); // original should be untouched
+             print("ll["+i+"]",ll[i]); // original should be untouched
+         }
     }
 }
