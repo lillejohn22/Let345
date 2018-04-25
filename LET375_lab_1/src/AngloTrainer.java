@@ -90,7 +90,7 @@ public class AngloTrainer {
 
     public static void main(String[] args) {
     		try {
-    		AngloTrainer trainer = new AngloTrainer(args[0]);
+			AngloTrainer trainer = new AngloTrainer(args[0]);
     		
     		int maxLength = trainer.findLongestWord(trainer.dictSet); // Find length of longest word
     		String randomLetters = trainer.randomLetters(maxLength); // Compute random letters
