@@ -6,7 +6,7 @@ public class Penta extends Flake {
 		this.turtle = turtle;
 		turtle.turnTo(31.0);
 		
-		for( int i = 1; i <= 4; i++ ) {
+		for( int i = 1; i <= 5; i++ ) {
 			turtle.turn(-72.0);
 			drawSide(n, size);	
 		}
