@@ -13,8 +13,7 @@ public class Mobile {
 		type = MobileType.SIMPLE;
 		this.weight = weight;
 		left = null;
-		right = null;
-		
+		right = null;	
 	}
 	
 	public Mobile( Mobile left, float leftLength, Mobile right, float rightLength ) {
@@ -34,7 +33,7 @@ public class Mobile {
 	}  
 	
 	// Return the maximum height of the mobile
-	public int getHeight() { 						// COMPLETE
+	public int getHeight() { // COMPLETE
 		int depth = 0;
 		
 		if( this.type == MobileType.SIMPLE )		// Base case
@@ -48,7 +47,7 @@ public class Mobile {
 	}  
 	
 	// Print the leaves of the mobile
-	public void flatten()  {
+	public void flatten()  { // COMPLETE
 		
 		if( this.type == MobileType.SIMPLE )		// Base case
 			System.out.println(this.weight);
@@ -59,7 +58,7 @@ public class Mobile {
 	}  
 	
 //	Print a structured view of the mobile
-	public void prettyPrint() {
+	public void prettyPrint() { // COMPLETE
 		
 	    if( this.type == MobileType.SIMPLE )		// Base case
 	    	System.out.printf( "(%.0f)", this.getWeight());
@@ -79,30 +78,39 @@ public class Mobile {
         left.isBalanced() && right.isBalanced() &&
         leftLength * left.getWeight() == rightLength * right.getWeight();
     }   
-	
-    public boolean equals(Mobile m1, Mobile m2) { // NOT COMPLETEE
-    	
-    	if( m1.type == MobileType.SIMPLE && m2.type == MobileType.SIMPLE )
-    		return ( m1.weight == m2.weight );
-    	
-    	if( m1.type == MobileType.COMPOSITE && m2.type == MobileType.COMPOSITE ) {
-    		if( m1.leftLength == m2.leftLength && m1.rightLength == m2.rightLength)
-    			return equals(m1.left, m2.left) && equals(m1.right, m2.right);
-    	}
-    	else
+    
+    
+    public boolean equals(Object obj ) { // COMPLETE
+ 
+    	if( !(obj instanceof Mobile) )
     		return false;
+    	Mobile mob = (Mobile) obj; // type cast
+    	
+    	// If both are simple: compare weights
+    	if( isSimple() && mob.isSimple() ) // Base case
+    		return ( weight == mob.weight );
+    	
+    	// if both are composite: compare arm lengths.
+    	if( !isSimple() && !mob.isSimple() ) { // Recursive case
+    		if( leftLength == mob.leftLength && rightLength == mob.rightLength)
+    			return left.equals(mob.left) && right.equals(mob.right);
+    	}
+    	
+    	// If one is simple and the other composite or both are composite but with different
+    	// arm lengths, return false.
     	return false;
     }
-
     
 //	Return a clone of this mobile
-	public Mobile clone() {
-         // ...
-         return null;
+	public Mobile clone() {	// COMPLETE
+		if( isSimple() )
+			return new Mobile(weight);
+			
+		return new Mobile(left.clone(), leftLength, right.clone(), rightLength);
 	}
 	
 // Change this mobile to its mirror image
-	public void mirror() {
+	public void mirror() { // COMPLETE
 		
 		if( this.type == MobileType.SIMPLE )
 			return;
@@ -128,14 +136,15 @@ public class Mobile {
 		System.out.println("Height:     " + m.getHeight() );
 		
 //		m.flatten(); System.out.println();
-		m.prettyPrint(); System.out.println();
-//		if ( m.isBalanced() )
-//			System.out.println("Balanced!");
-//		else
-//			System.out.println("Not balanced!");
-/*		
+//		m.prettyPrint(); System.out.println();
+		if ( m.isBalanced() )
+			System.out.println("Balanced!");
+		else
+			System.out.println("Not balanced!");
+		
 		Mobile m22 = new Mobile( new Mobile( 2 ), 6,  new Mobile( 3 ), 4 ),
 		       m3 = new Mobile( m1, 10, m22, 2 );
+		
 		if ( m.equals(m3) )
 			System.out.println("Equal!");		// They should be!
 		else
@@ -147,7 +156,7 @@ public class Mobile {
 		else
 			System.out.println("Not equal!");
 
-		if ( c == m )
+		if ( c == m ) // Do they reference the same object? Should not
 			System.out.println("Identical!");	// They should definately not!
 		else
 			System.out.println("Not identical!");
@@ -156,6 +165,6 @@ public class Mobile {
 		m.prettyPrint(); System.out.println();
 		m.mirror();
 		m.prettyPrint(); System.out.println();
-*/
+		 
 	}
 }
