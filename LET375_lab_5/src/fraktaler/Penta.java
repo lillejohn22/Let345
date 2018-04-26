@@ -4,7 +4,6 @@ public class Penta extends Flake {
 
 	public void draw( Turtle turtle, int n, double size ) {
 		this.turtle = turtle;
-		turtle.turnTo(31.0);
 		
 		for( int i = 1; i <= 5; i++ ) {
 			turtle.turn(-72.0);
@@ -16,7 +15,7 @@ public class Penta extends Flake {
 		if( n <= 0 )				// Base casee
 			turtle.walk(size);
 		else {						// Recursive case
-			double l = size/4.0;
+			double l = size/4;
 			drawSide(n-1,l);
 			turtle.turn(-108.0);
 			drawSide(n-1,l);
