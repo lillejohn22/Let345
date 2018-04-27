@@ -24,7 +24,7 @@ public class LinearRecursion {
     	n = Math.abs(n);
     	
 //    	First is base case, second is recursive case
-    	return ( n == 1 ) ? m : m + multiply(m, n-1);
+    	return ( n == 0 ) ? 0 : m + multiply(m, n-1);
     } 
     
 // A.3

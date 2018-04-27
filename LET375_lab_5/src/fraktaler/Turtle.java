@@ -1,4 +1,7 @@
 package fraktaler;
+
+import java.util.concurrent.TimeUnit;
+
 public class Turtle {
     private Point position = new Point();
 	private double direction = 0.0;
