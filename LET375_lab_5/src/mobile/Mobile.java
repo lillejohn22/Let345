@@ -1,6 +1,4 @@
 package mobile;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class Mobile {
 	private enum MobileType { SIMPLE, COMPOSITE }
@@ -33,21 +31,21 @@ public class Mobile {
 	}  
 	
 	// Return the maximum height of the mobile
-	public int getHeight() { // COMPLETE
-		int depth = 0;
+	public int getHeight() {
+		int height = 0;
 		
 		if( this.type == MobileType.SIMPLE )		// Base case
 			return 1;
 		else {										// Recursive case
 			int maxLeft = this.left.getHeight();
 			int maxRight = this.right.getHeight();
-			depth = 1 + Math.max(maxLeft, maxRight); // count current mobile and max depth of subtrees
+			height = 1 + Math.max(maxLeft, maxRight); // count current mobile and max depth of subtrees
 		}
-		return depth;
+		return height;
 	}  
 	
 	// Print the leaves of the mobile
-	public void flatten()  { // COMPLETE
+	public void flatten()  {
 		
 		if( this.type == MobileType.SIMPLE )		// Base case
 			System.out.println(this.weight);
@@ -58,7 +56,7 @@ public class Mobile {
 	}  
 	
 //	Print a structured view of the mobile
-	public void prettyPrint() { // COMPLETE
+	public void prettyPrint() {
 		
 	    if( this.type == MobileType.SIMPLE )		// Base case
 	    	System.out.printf( "(%.0f)", this.getWeight());
@@ -80,7 +78,7 @@ public class Mobile {
     }   
     
     
-    public boolean equals(Object obj ) { // COMPLETE
+    public boolean equals(Object obj ) {
  
     	if( !(obj instanceof Mobile) )
     		return false;
@@ -102,7 +100,7 @@ public class Mobile {
     }
     
 //	Return a clone of this mobile
-	public Mobile clone() {	// COMPLETE
+	public Mobile clone() {
 		if( isSimple() )
 			return new Mobile(weight);
 			
@@ -110,7 +108,7 @@ public class Mobile {
 	}
 	
 // Change this mobile to its mirror image
-	public void mirror() { // COMPLETE
+	public void mirror() {
 		
 		if( this.type == MobileType.SIMPLE )
 			return;
@@ -135,8 +133,8 @@ public class Mobile {
 		System.out.println("Total mass: " + m.getWeight() );
 		System.out.println("Height:     " + m.getHeight() );
 		
-//		m.flatten(); System.out.println();
-//		m.prettyPrint(); System.out.println();
+		m.flatten(); System.out.println();
+		m.prettyPrint(); System.out.println();
 		if ( m.isBalanced() )
 			System.out.println("Balanced!");
 		else

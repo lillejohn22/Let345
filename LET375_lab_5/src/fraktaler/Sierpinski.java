@@ -11,7 +11,7 @@ public class Sierpinski extends Flake{
 	}
 
 	private void drawSide( int n, double size ) {
-		if( n <= 0 ) {			// Base casee
+		if( n <= 0 ) {			// Base case
 			turtle.walk(size);	
 		}
 		else {						// Recursive case			

@@ -2,12 +2,12 @@ package linearrecursion;
 import java.io.IOException;
 
 /**
- * @author NN
- * @version 2017-05-
+ * @author Anton Frigård & Johan Nilsson
+ * @version 2017-04-27
  */
 public class LinearRecursion {
 // A.1
-    public static void reverseInput() throws IOException { // COMPLETE
+    public static void reverseInput() throws IOException {
     	char temp = (char)System.in.read();
     	
     	if( temp == '\n' )		// Base case
@@ -19,7 +19,7 @@ public class LinearRecursion {
     }
         
 // A.2
-    public static int multiply(int m, int n) { // COMPLETE
+    public static int multiply(int m, int n) {
     	m = ( n < 0 ) ? -m : m;
     	n = Math.abs(n);
     	
@@ -28,7 +28,7 @@ public class LinearRecursion {
     } 
     
 // A.3
-    public static int countDigits(int n) { // COMPLETE
+    public static int countDigits(int n) {
     	// First is base case, second is recursive case
         return ( n < 10 ) ? 1 : 1 + countDigits(n / 10); 
     }
@@ -61,7 +61,7 @@ public class LinearRecursion {
  }
     
 // A.5  
- public static ListNode append(ListNode l1, ListNode l2 ) { // INCOMPLETE
+ public static ListNode append(ListNode l1, ListNode l2 ) {
 	 
 	 // Special case
 	 if( l1 == null ) return copy(l2);
@@ -78,22 +78,22 @@ public class LinearRecursion {
  * ********************************************/
     public static void main(String[] args) throws IOException {
 // A.1
-//     reverseInput();
-//     System.out.println();
+     reverseInput();
+     System.out.println();
 // A.2
-//      System.out.println("\nTesting multiply:");
-//      System.out.println(multiply(5,7));
-//      System.out.println(multiply(-5,7));
-//      System.out.println(multiply(5,-7));
-//      System.out.println(multiply(-5,-7));
-//      System.out.println(multiply(0,7));
-//      System.out.println(multiply(5,0));
+      System.out.println("\nTesting multiply:");
+      System.out.println(multiply(5,7));
+      System.out.println(multiply(-5,7));
+      System.out.println(multiply(5,-7));
+      System.out.println(multiply(-5,-7));
+      System.out.println(multiply(0,7));
+      System.out.println(multiply(5,0));
 // A.3
-//      System.out.println("\nTesting countDigits:");
-//      System.out.println(countDigits(0));
-//      System.out.println(countDigits(5));
-//      System.out.println(countDigits(123));
-//      System.out.println(countDigits(12345));
+      System.out.println("\nTesting countDigits:");
+      System.out.println(countDigits(0));
+      System.out.println(countDigits(5));
+      System.out.println(countDigits(123));
+      System.out.println(countDigits(12345));
         
 // A.4  
         // An array of some test listss
@@ -104,17 +104,17 @@ public class LinearRecursion {
             cons(4,cons(5,cons(6,null)))    // [4,5,6]
         };
        
-//      System.out.println("\nIn the test cases below, you should verify that"); 
-//      System.out.println("the ll[i] printouts are consistent with the definitions"); 
-//      System.out.println("of the lists in the ll array. Those lists must not be"); 
-//      System.out.println("changed by your functions."); 
+      System.out.println("\nIn the test cases below, you should verify that"); 
+      System.out.println("the ll[i] printouts are consistent with the definitions"); 
+      System.out.println("of the lists in the ll array. Those lists must not be"); 
+      System.out.println("changed by your functions."); 
 
-//      System.out.println("\nTesting copy:");    
-//      for ( int i = 0; i < ll.length; i++ ) {
-//          ListNode copy = cons(999,copy(ll[i]));
-//          print("cons(999,copy(ll["+i+"]))", copy);       // result
-//          print("ll["+i+"]",ll[i]); // original should be untouched
-//      }
+      System.out.println("\nTesting copy:");    
+      for ( int i = 0; i < ll.length; i++ ) {
+          ListNode copy = cons(999,copy(ll[i]));
+          print("cons(999,copy(ll["+i+"]))", copy);       // result
+          print("ll["+i+"]",ll[i]); // original should be untouched
+      }
 // A.5     
          System.out.println("\nTesting append from left:"); 
          for ( int i = 0; i < ll.length - 1; i++ ) {
