@@ -1,6 +1,7 @@
-package view;
+//package view;
+package observerExample.view;
 
-import model.*;
+import observerExample.model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

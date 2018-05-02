@@ -1,7 +1,7 @@
- 
+package observerExample; 
 
-import view.*;
-import model.*;
+import observerExample.view.*;
+import observerExample.model.*;
 
 /**
  * This class contains the data handling part of the program

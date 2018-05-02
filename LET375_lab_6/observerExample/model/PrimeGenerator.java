@@ -1,4 +1,5 @@
-package model;
+//package model;
+package observerExample.model;
 
 /**
  * Genereates the next prime number: 2, 3, 5, 7, 11, 13, 17, 19, ...

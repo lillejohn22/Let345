@@ -1,3 +1,4 @@
+package maze;
 import javax.swing.*;
 import java.awt.*;
 

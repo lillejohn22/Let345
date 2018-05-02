@@ -1,3 +1,5 @@
+package maze;
+
 import java.util.Observable;
 
 // Maze should inherit Observable, but Java does not allow multiple inheritance, 
