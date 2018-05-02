@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.geom.*;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.LinkedList;
 
 public class BoardDisplay extends Board implements Observer {
 	
@@ -81,6 +82,15 @@ public class BoardDisplay extends Board implements Observer {
 	}
 	    
 	public void update(Observable o, Object arg) {
-//		 Develop this method!
-	}
+		drawGrid();
+		
+		try {
+			Pair<Integer,Point.Direction> pair = (Pair<Integer, Point.Direction>) arg;
+			knockDownWall(pair.first, pair.second);
+		}
+		catch( ClassCastException e) {
+			System.out.println(e);
+		}
+		
+		}
 }

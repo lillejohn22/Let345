@@ -78,8 +78,10 @@ public class Gui
      */
     private void createMaze()
     {
-    	showValues(width,height);  // Please remove this call when things starts to work correctly (OW we all go crazy!)
-//    	Develop this method!
+    	Maze maze = new Maze(width, height);
+    	BoardDisplay board = new BoardDisplay(canvas, width, height);
+    	maze.addObserver(board); // What we missed before
+    	maze.create();
     	searchButton.setEnabled(true);
     }
 
@@ -192,5 +194,6 @@ public class Gui
         
 	public static void main(String[] args) {
 		new Gui();
+
 	}
 }
