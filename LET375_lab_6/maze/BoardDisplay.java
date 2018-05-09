@@ -5,7 +5,7 @@ import java.awt.geom.*;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.LinkedList;
-
+import java.util.ArrayList;
 public class BoardDisplay extends Board implements Observer {
 	
 	private int gridSize, rowOffset, colOffset;
@@ -85,8 +85,14 @@ public class BoardDisplay extends Board implements Observer {
 		drawGrid();
 		
 		try {
-			Pair<Integer,Point.Direction> pair = (Pair<Integer, Point.Direction>) arg;
-			knockDownWall(pair.first, pair.second);
+			ArrayList<Pair<Integer,Point.Direction>> listCopy = (ArrayList<Pair<Integer,Point.Direction>>) arg;
+			Pair<Integer,Point.Direction> pair;
+			
+			for(int i = 0; i < listCopy.size(); i++) {
+				pair = listCopy.get(i);
+				knockDownWall(pair.first, pair.second);
+			}	
+			
 		}
 		catch( ClassCastException e) {
 			System.out.println(e);

@@ -78,6 +78,7 @@ public class Gui
      */
     private void createMaze()
     {
+    	BoardDisplay board2 = new BoardDisplay(canvas, width, height);
     	Maze maze = new Maze(width, height);
     	BoardDisplay board = new BoardDisplay(canvas, width, height);
     	maze.addObserver(board); // What we missed before
