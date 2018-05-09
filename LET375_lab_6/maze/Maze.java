@@ -12,7 +12,7 @@ public class Maze extends Board {
     int rows,cols;
     Pair<Integer, Point.Direction> pair; 
     HashMap<Integer, Point.Direction> directions; 
-
+    Random random;
     public Maze( int rows, int cols ) {
         super(rows,cols);
         this.rows = rows;
@@ -22,7 +22,7 @@ public class Maze extends Board {
         directions.put(1, Point.Direction.RIGHT);
         directions.put(2, Point.Direction.DOWN);
         directions.put(3, Point.Direction.LEFT);
-        Random random = new Random();
+        random = new Random();
         }
     
 
