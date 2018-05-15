@@ -86,8 +86,38 @@ public class Maze extends Board {
 
     public void search() {
     	graph.dijkstra(0);
-    	this.setChanged();
-    	this.notifyObservers(graph.getPath(rows*cols-1));
+    	ArrayList<Integer> theNodes = (ArrayList<Integer>) graph.getPath(rows*cols-1);
+    	System.out.println(theNodes.size());
+    	
+    	for( Integer integer : theNodes ) {
+    		this.setChanged();
+        	this.notifyObservers(integer);
+    	}
+  	   	
+    	
     }
 //    ...
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
