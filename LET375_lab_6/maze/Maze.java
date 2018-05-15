@@ -36,18 +36,14 @@ public class Maze extends Board {
 
     public void create() {
     		
-    	// Knocks out the first wall, at the starting point
-    	
+    	// Knocks out the first and last wall
     	setChanged();
     	notifyObservers(new Pair<Integer, Point.Direction>(0, Point.Direction.LEFT));
-
-    	// Knocks out the last wall, at the exit 
-    	
     	setChanged();
     	notifyObservers(new Pair<Integer, Point.Direction>(rows*cols-1, Point.Direction.RIGHT));
 
     	// knocks out walls in between
-    	int count = 0;
+    	int count = 0; // Keep track of the number of performed union operations
     	
     	while(count < rows*cols-1) {			// Makes sure every set is connected aka. every box is reachable
     		
@@ -56,17 +52,17 @@ public class Maze extends Board {
     		int randDir = random.nextInt(4);
     		
     		Point thisPoint = new Point(randRow,randCol);
-    		int eqClass1 = grid.find(getCellId(thisPoint));
+    		int eqClass1 = grid.find( getCellId(thisPoint) );
     		int orgCellId = getCellId(thisPoint);
     		
     		// Check that we do not step outside maze if we go in the random direction
     		thisPoint.move(directions.get(randDir));
-    		if(!isValid(thisPoint)) continue;
+    		if( !isValid(thisPoint) ) continue;
     		
-    		int eqClass2 = grid.find(getCellId(thisPoint)); // New point is valid, get eqClass
+    		int eqClass2 = grid.find( getCellId(thisPoint) ); // New point is valid, get eqClass
     	  
     		if(eqClass1 != eqClass2) {					// Makes sure that we don't get circular paths 
-    			grid.union(eqClass1,eqClass2);
+    			grid.union(eqClass1, eqClass2);
     			count++;
     			int prevId = getCellId(thisPoint);
     			
@@ -80,21 +76,17 @@ public class Maze extends Board {
     	    	this.notifyObservers(new Pair<Integer, Point.Direction>(prevId, oppositeDir));
     			}
     		}
-    	
     }
    
 
     public void search() {
     	graph.dijkstra(0);
     	ArrayList<Integer> theNodes = (ArrayList<Integer>) graph.getPath(rows*cols-1);
-    	System.out.println(theNodes.size());
     	
-    	for( Integer integer : theNodes ) {
+    	for( Integer cellId : theNodes ) {
     		this.setChanged();
-        	this.notifyObservers(integer);
+        	this.notifyObservers(cellId);
     	}
-  	   	
-    	
     }
 //    ...
 }

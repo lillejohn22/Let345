@@ -8,26 +8,23 @@ public class ExtendedGraph extends Graph {
 	List<Integer> tempPath;
 	
 	public List<Integer> getPath( int destName ) {
-		nodePath = new ArrayList<Integer>();
 		nodePath = getPath(vertexMap.get( destName ));
-		for(Integer noden : nodePath) {
-			System.out.println(noden);
-		}
-		
 		return nodePath;
 	}
 	
 	private List<Integer> getPath( Vertex dest ) {
-		ArrayList<Integer> node = new ArrayList<Integer>();
 		
-		if(dest.prev != null) {
-			node.addAll(getPath(dest.prev));
-			return node;
+		ArrayList<Integer> node = new ArrayList<Integer>();
+		node.add(dest.name);
+		System.out.println("CURRENT NODE NAME IS: " + dest.name);
+		
+		if(dest.prev != null) {			// Recursive case
+			node.addAll(getPath(dest.prev)); // Append to existing list
+			return new ArrayList<Integer>(node); // return a copy of node
 		}
-		else {
-			node.add(dest.name);
-			return node;
-		}
+		
+		// Base case
+		return new ArrayList<Integer>(node); // return a copy of node 
 	}
 	
 
