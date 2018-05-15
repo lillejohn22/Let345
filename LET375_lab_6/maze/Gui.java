@@ -23,6 +23,8 @@ public class Gui
     private JButton quitButton;    
     private int width = 0, height = 0;
     private Canvas canvas;
+    private Maze maze;
+    private BoardDisplay board;
     
     /**
      * Create an Maze explorer and display its GUI on screen.
@@ -78,10 +80,9 @@ public class Gui
      */
     private void createMaze()
     {
-    	BoardDisplay board2 = new BoardDisplay(canvas, width, height);
-    	Maze maze = new Maze(width, height);
-    	BoardDisplay board = new BoardDisplay(canvas, width, height);
-    	maze.addObserver(board); // What we missed before
+    	maze = new Maze(width, height);
+    	board = new BoardDisplay(canvas, width, height);
+    	maze.addObserver(board);
     	maze.create();
     	searchButton.setEnabled(true);
     }
@@ -91,8 +92,7 @@ public class Gui
      */
     private void searchMaze()
     {
-    	showMessage("Fake search"); // Please remove!
-//    	Develop this method!
+    	maze.search();
     }
       
     // ---- Swing stuff to build the frame and all its components and menus ----
