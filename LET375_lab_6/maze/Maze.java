@@ -71,8 +71,8 @@ public class Maze extends Board {
     			graph.addEdge(orgCellId, prevId, 0);
     			
     			// For labyrinth
-    			Point.Direction tempDir = directions.get((randDir + 2) % 4);
-    			knockList.add(new Pair<Integer, Point.Direction>(prevId, tempDir));
+    			Point.Direction oppositeDir = directions.get((randDir + 2) % 4);
+    			knockList.add(new Pair<Integer, Point.Direction>(prevId, oppositeDir));
     			}
     		}
     	this.setChanged();
