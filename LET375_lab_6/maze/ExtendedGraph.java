@@ -1,8 +1,6 @@
 package maze;
 import java.util.*;
 
-import sun.jvm.hotspot.debugger.posix.elf.ELFSectionHeader;
-
 
 public class ExtendedGraph extends Graph {
 	
@@ -18,11 +16,15 @@ public class ExtendedGraph extends Graph {
 	}
 	
 	private List<Integer> getPath( Vertex dest ) {
-		if(dest.prev != null)
-			getPath(dest.prev);
-		else
-			tempList = new  ArrayList<Integer>(dest.name);
-			return tempList.add(dest.name);
+		ArrayList<Integer> node = new ArrayList<Integer>();
+		if(dest.prev != null) {
+			node.addAll(getPath(dest.prev));
+			return node;
+		}
+		else {
+			node.add(dest.name);
+			return node;
+		}
 	}
 	
 

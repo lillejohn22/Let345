@@ -37,11 +37,15 @@ public class Maze extends Board {
     public void create() {
     		
     	// Knocks out the first wall, at the starting point
-    	knockList.add(new Pair<Integer, Point.Direction>(0, Point.Direction.LEFT));
     	
+    	setChanged();
+    	notifyObservers(new Pair<Integer, Point.Direction>(0, Point.Direction.LEFT));
+
     	// Knocks out the last wall, at the exit 
-    	knockList.add(new Pair<Integer, Point.Direction>(rows*cols-1, Point.Direction.RIGHT));
     	
+    	setChanged();
+    	notifyObservers(new Pair<Integer, Point.Direction>(rows*cols-1, Point.Direction.RIGHT));
+
     	// knocks out walls in between
     	int count = 0;
     	
@@ -72,11 +76,11 @@ public class Maze extends Board {
     			
     			// For labyrinth
     			Point.Direction oppositeDir = directions.get((randDir + 2) % 4);
-    			knockList.add(new Pair<Integer, Point.Direction>(prevId, oppositeDir));
+    			this.setChanged();
+    	    	this.notifyObservers(new Pair<Integer, Point.Direction>(prevId, oppositeDir));
     			}
     		}
-    	this.setChanged();
-    	this.notifyObservers(knockList);
+    	
     }
    
 

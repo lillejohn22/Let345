@@ -26,6 +26,8 @@ public class BoardDisplay extends Board implements Observer {
 		// compute offset to center it
 		rowOffset = (height-maxRow*gridSize)/2 + 2;
 		colOffset = (width-maxCol*gridSize)/2 + 2;
+		
+		drawGrid(); // IS THIS A GOOD PLACE FOR THIS? 
 	}
 	
 	private void drawGrid() {
@@ -82,21 +84,18 @@ public class BoardDisplay extends Board implements Observer {
 	}
 	    
 	public void update(Observable o, Object arg) {
-		drawGrid();
 		
 		try {
-			ArrayList<Pair<Integer,Point.Direction>> listCopy = (ArrayList<Pair<Integer,Point.Direction>>) arg;
-			Pair<Integer,Point.Direction> pair;
-			
-			for(int i = 0; i < listCopy.size(); i++) {
-				pair = listCopy.get(i);
+			if(arg instanceof Pair) {
+				Pair<Integer,Point.Direction> pair = (Pair<Integer,Point.Direction>) arg;
 				knockDownWall(pair.first, pair.second);
+			}
+			else if(arg instanceof Integer) {
+				fillCell((int) arg);
+			}
 			}	
-			
-		}
 		catch( ClassCastException e) {
 			System.out.println(e);
 		}
-		
 		}
 }
