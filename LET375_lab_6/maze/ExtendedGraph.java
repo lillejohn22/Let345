@@ -1,34 +1,28 @@
 package maze;
 import java.util.*;
 
+import sun.jvm.hotspot.debugger.posix.elf.ELFSectionHeader;
+
 
 public class ExtendedGraph extends Graph {
 	
 	List<Integer> nodePath;
+	List<Integer> tempPath;
 	
 	public List<Integer> getPath( int destName ) {
 		nodePath = new ArrayList<Integer>();
-		nodePath.add(1,1);
+		nodePath = getPath(vertexMap.get( destName ));
 		
-		printPath(destName);
 		
 		return nodePath;
 	}
 	
-//    {
-//        Vertex w = vertexMap.get( destName );
-//        if( w == null )
-//            throw new NoSuchElementException( "Destination vertex not found" );
-//        else
-//        {
-//			  add node to list at place 1
-//            getPath( w );
-//		  }
-    
-	
 	private List<Integer> getPath( Vertex dest ) {
-			
-		return null;
+		if(dest.prev != null)
+			getPath(dest.prev);
+		else
+			tempList = new  ArrayList<Integer>(dest.name);
+			return tempList.add(dest.name);
 	}
 	
 
