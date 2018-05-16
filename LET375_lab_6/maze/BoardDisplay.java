@@ -27,7 +27,7 @@ public class BoardDisplay extends Board implements Observer {
 		rowOffset = (height-maxRow*gridSize)/2 + 2;
 		colOffset = (width-maxCol*gridSize)/2 + 2;
 		
-		drawGrid(); // IS THIS A GOOD PLACE FOR THIS? 
+		drawGrid(); // IS THIS A VALID PLACE FELIX? 
 	}
 	
 	private void drawGrid() {
@@ -84,18 +84,17 @@ public class BoardDisplay extends Board implements Observer {
 	}
 	    
 	public void update(Observable o, Object arg) {
-		
 		try {
 			if(arg instanceof Pair) {
 				Pair<Integer,Point.Direction> pair = (Pair<Integer,Point.Direction>) arg;
 				knockDownWall(pair.first, pair.second);
-			}
-			else if(arg instanceof Integer) {
-				fillCell((int) arg);
-			}
+				}
+			if( arg instanceof Integer ) {
+				fillCell( (int) arg );
+				}
 			}	
-		catch( ClassCastException e) {
+		catch( ClassCastException e ) {
 			System.out.println(e);
-		}
+			}
 		}
 }

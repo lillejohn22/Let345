@@ -1,12 +1,9 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
+LET375: LABB 6 
+AUTHORS: Anton Frigård, Johan Laberg Nilsson
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
-USER INSTRUCTIONS:
+---- BoardDisplay.java ----
+We placed the method call drawGrid() inside the constructor. We are unsure
+if this is allowed. According to the lab description, adding code is allowed.
+
+---- Maze.java ----
+On line 70, the modulo operation is performed to compute the opposite direction index.

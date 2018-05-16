@@ -80,6 +80,7 @@ public class Gui
      */
     private void createMaze()
     {
+    	canvas.erase();
     	maze = new Maze(width, height);
     	board = new BoardDisplay(canvas, width, height);
     	maze.addObserver(board);

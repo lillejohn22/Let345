@@ -2,20 +2,16 @@ package maze;
 
 import java.util.HashMap;
 import java.util.Random;
-import maze.Point.Direction;
-import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Maze extends Board {
     
-	ExtendedGraph graph;
-    DisjointSets grid;
     int rows,cols;
-    
-    Random random;
-    Pair<Integer, Point.Direction> pair; 
-    HashMap<Integer, Point.Direction> directions; 
-    ArrayList<Pair<Integer,Point.Direction>> knockList; 
+    private Random random;
+    final int lastCellId;
+    private DisjointSets djset;
+    private ExtendedGraph graph;
+    private HashMap<Integer, Point.Direction> directions; 
     
     public Maze( int rows, int cols ) {
         super(rows,cols);
@@ -24,9 +20,9 @@ public class Maze extends Board {
         
         random = new Random();
         graph = new ExtendedGraph();
-        grid = new DisjointSets(rows*cols);
+        lastCellId = rows*cols-1;
+        djset = new DisjointSets(rows*cols);
         directions = new HashMap<Integer, Point.Direction>();
-        knockList = new ArrayList<Pair<Integer,Point.Direction>>();
         
         directions.put(0, Point.Direction.UP);
         directions.put(1, Point.Direction.RIGHT);
@@ -40,40 +36,40 @@ public class Maze extends Board {
     	setChanged();
     	notifyObservers(new Pair<Integer, Point.Direction>(0, Point.Direction.LEFT));
     	setChanged();
-    	notifyObservers(new Pair<Integer, Point.Direction>(rows*cols-1, Point.Direction.RIGHT));
+    	notifyObservers(new Pair<Integer, Point.Direction>(lastCellId, Point.Direction.RIGHT));
 
-    	// knocks out walls in between
+    	// Knocks out walls in between
     	int count = 0; // Keep track of the number of performed union operations
     	
-    	while(count < rows*cols-1) {			// Makes sure every set is connected aka. every box is reachable
+    	while(count < lastCellId) {			// Makes sure every set is connected aka. every box is reachable
     		
     		int randRow = random.nextInt(rows); 
     		int randCol = random.nextInt(cols);
     		int randDir = random.nextInt(4);
     		
     		Point thisPoint = new Point(randRow,randCol);
-    		int eqClass1 = grid.find( getCellId(thisPoint) );
+    		int eqClass1 = djset.find( getCellId(thisPoint) );
     		int orgCellId = getCellId(thisPoint);
     		
-    		// Check that we do not step outside maze if we go in the random direction
-    		thisPoint.move(directions.get(randDir));
+    		// Are we inside boundaries if we move in the random direction?
+    		thisPoint.move( directions.get(randDir) );
     		if( !isValid(thisPoint) ) continue;
     		
-    		int eqClass2 = grid.find( getCellId(thisPoint) ); // New point is valid, get eqClass
+    		int eqClass2 = djset.find( getCellId(thisPoint) );
     	  
     		if(eqClass1 != eqClass2) {					// Makes sure that we don't get circular paths 
-    			grid.union(eqClass1, eqClass2);
+    			djset.union(eqClass1, eqClass2);
     			count++;
-    			int prevId = getCellId(thisPoint);
+    			int prevCellId = getCellId(thisPoint);
     			
     			// For graph
-    			graph.addEdge(prevId, orgCellId, 0);
-    			graph.addEdge(orgCellId, prevId, 0);
+    			graph.addEdge(prevCellId, orgCellId, 0);
+    			graph.addEdge(orgCellId, prevCellId, 0);
     			
     			// For labyrinth
     			Point.Direction oppositeDir = directions.get((randDir + 2) % 4);
     			this.setChanged();
-    	    	this.notifyObservers(new Pair<Integer, Point.Direction>(prevId, oppositeDir));
+    	    	this.notifyObservers(new Pair<Integer, Point.Direction>(prevCellId, oppositeDir));
     			}
     		}
     }
@@ -81,14 +77,15 @@ public class Maze extends Board {
 
     public void search() {
     	graph.dijkstra(0);
-    	ArrayList<Integer> theNodes = (ArrayList<Integer>) graph.getPath(rows*cols-1);
+//    	graph.unweighted(0);
+    	
+    	ArrayList<Integer> theNodes = (ArrayList<Integer>) graph.getPath(lastCellId);
     	
     	for( Integer cellId : theNodes ) {
     		this.setChanged();
         	this.notifyObservers(cellId);
     	}
     }
-//    ...
 }
 
 
